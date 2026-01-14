@@ -5,6 +5,7 @@ import './App.css'
 import MainLayout from './layouts/MainLayout/MainLayout'
 import { Global } from '@emotion/react'
 import { globalStyles } from './styles/global'
+import MainPage from './pages/MainPage/MainPage'
 
 function App() {
     const [count, setCount] = useState(0)
@@ -13,7 +14,7 @@ function App() {
         <>
             <Global styles={globalStyles}/>
             <MainLayout>
-                <h1>PORTPOLIO</h1>
+                <MainPage/>
             </MainLayout>
         </>
     );
