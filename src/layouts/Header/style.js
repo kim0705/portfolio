@@ -19,16 +19,13 @@ export const Navigation = styled.nav`
         list-style: none;
         margin: 0;
         padding: 0;
-    
-    li {
-        cursor: pointer;
-        font-weight: 500;
-        color: #ccc;
-        transition: color 0.2s;
-
-    &:hover {
-        color: #ffffff;
     }
+
+    a {
+    text-decoration: none;
+    color: inherit;         
+    &:hover {
+      color: #007bff;       
     }
   }
 `;

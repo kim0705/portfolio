@@ -1,5 +1,5 @@
-import React from 'react'
-import Hero from '../../sections/Hero/Hero'
+import React from 'react';
+import Hero from '../../components/sections/Hero/Hero';
 
 function MainPage() {
 	return (
