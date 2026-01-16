@@ -5,7 +5,6 @@ export const LayoutWrapper = styled.div`
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
-    background-color: #1a1a1a;
     color: white;
 `;
 
