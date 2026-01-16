@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { Global } from '@emotion/react';
 import { globalStyles } from './styles/global';
