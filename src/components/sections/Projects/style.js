@@ -9,7 +9,7 @@ export const ProjectContainer = styled.section`
 
 export const ProjectContent = styled.div`
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
 `;
 
 export const ProjectHeader = styled.div`
@@ -88,5 +88,57 @@ export const TagList = styled.div`
         padding: 5px 12px;
         border-radius: 6px;
         border: 1px solid #333;
+    }
+`;
+
+export const ProjectPageContainer = styled.div`
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+`;
+
+export const TitleSection = styled.section`
+    margin-bottom: 80px;
+    text-align: center;
+
+    h1 { 
+        font-size: 56px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        background: linear-gradient(to right, #ffffff, #888888);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    p { 
+        font-size: 20px;
+        color: #aaaaaa;
+    }
+`;
+
+export const ProjectGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+`;
+
+export const LinkWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+
+    button {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        
+        &:hover { 
+            background: #444; 
+        }
     }
 `;
