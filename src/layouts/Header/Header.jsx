@@ -22,11 +22,11 @@ function Header() {
 							Projects
 						</Link>
 					</li>
-					<li>
+					{/* <li>
 						<Link to="/portfolio">
 							Contact
 						</Link>
-					</li>
+					</li> */}
 				</ul>
 			</S.Navigation>
 		</S.HeaderContainer>

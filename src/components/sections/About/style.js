@@ -9,7 +9,7 @@ export const AboutContainer = styled.section`
 
 export const AboutContent = styled.div`
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
     padding: 50px;
     margin: 0 20px; 
     border: 1px solid #2a2a2a;
@@ -115,7 +115,7 @@ export const ProjectButton = styled.button`
 
 export const AboutPageContainer = styled.main`
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     /* padding: 60px 20px; */
     display: flex;
@@ -135,7 +135,6 @@ export const TitleSection = styled.section`
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-
     p {
         font-size: 20px;
         color: #aaaaaa;
