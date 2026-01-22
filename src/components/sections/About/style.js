@@ -117,7 +117,6 @@ export const AboutPageContainer = styled.main`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    /* padding: 60px 20px; */
     display: flex;
     flex-direction: column;
     color: #ffffff;
