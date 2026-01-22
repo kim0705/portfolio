@@ -21,6 +21,7 @@ export const ProjectHeader = styled.div`
         margin-bottom: 16px; 
         font-weight: 700; 
     }
+    
     p { 
         font-size: 18px; 
         color: #666; 

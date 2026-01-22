@@ -1,7 +1,15 @@
 import React from 'react';
 import * as S from './style';
+import { useNavigate } from 'react-router-dom';
 
 function Projects({ type = "main" }) {
+
+    const navigate = useNavigate();
+
+    const projectDetailOnClick = (id) => {
+        navigate(`/portfolio/projects/${id}`);
+    };
+
     return (
         type === "main" ? (
             /* 1. 메인 페이지용 (MainPage) */
@@ -12,7 +20,7 @@ function Projects({ type = "main" }) {
                     </S.ProjectHeader>
 
                     <S.ProjectCardContainer>
-                        <S.ProjectCard>
+                        <S.ProjectCard onClick={() => projectDetailOnClick(1)}>
                             <S.CardImageWrapper>
                                 <img src="" alt="" />
                             </S.CardImageWrapper>
@@ -25,7 +33,7 @@ function Projects({ type = "main" }) {
                                 </S.TagList>
                             </S.CardInfo>
                         </S.ProjectCard>
-                        <S.ProjectCard>
+                        <S.ProjectCard onClick={() => projectDetailOnClick(2)}>
                             <S.CardImageWrapper>
                                 <img src="" alt="" />
                             </S.CardImageWrapper>
@@ -64,7 +72,7 @@ function Projects({ type = "main" }) {
 
                     <S.ProjectGrid type="page">
                         {[1, 2, 3, 4].map((item) => (
-                            <S.ProjectCard key={item} type="page">
+                            <S.ProjectCard key={item} type="page" onClick={() => projectDetailOnClick(item)}>
                                 <S.CardImageWrapper>
                                     <img src={null} alt="Project Thumbnail" />
                                 </S.CardImageWrapper>
