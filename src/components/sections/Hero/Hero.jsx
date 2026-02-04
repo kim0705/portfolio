@@ -1,12 +1,16 @@
 import React from 'react';
 import * as S from './style';
+import profileDatas from '../../../data/profile.json';
 
 function Hero() {
+
+    const { profile } = profileDatas;
+
     return (
         <S.HeroContainer>
             <S.HeroContent>
-                <S.Title>Flexible Developer</S.Title>
-                <S.Subtitle>현실에 안주하지 않고 <span>매일 더 나은 가치를 만드는</span> 개발자입니다.</S.Subtitle>
+                <h2>{profile?.greeting?.main?.intro}</h2>
+                <p>{profile?.greeting?.main?.detail}</p>
             </S.HeroContent>
         </S.HeroContainer>
     );

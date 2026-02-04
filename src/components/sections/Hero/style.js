@@ -2,35 +2,47 @@ import styled from "@emotion/styled";
 
 export const HeroContainer = styled.section`
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #242424;
+    border: 1px solid #2a2a2a;
+    border-radius: 40px;
+    padding: 80px 70px;
 `;
 
 export const HeroContent = styled.div`
-    text-align: center;
-    max-width: 900px;
-    padding: 0 20px;
-`;
+    h2 {
+        font-size: 36px;
+        line-height: 1.4;
+        color: #f1f1f1;
+        font-weight: 800;
 
-export const Title = styled.h1`
-    font-size: 65px;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 24px;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-`;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: titleFadeUp 0.6s ease-out forwards;
+    }
 
-export const Subtitle = styled.p`
-    font-size: 20px;
-    color: #888888;
-    line-height: 32px;
-    margin-top: 10px;
-    
-    span {
-        color: #ffffff;
-        font-weight: 600;
-        position: relative;
+    p {
+        margin-top: 28px;
+        font-size: 18px;
+        color: #dddddd;
+        line-height: 1.8;
+
+        opacity: 0;
+        transform: translateY(12px);
+        animation: descFadeUp 0.6s ease-out forwards;
+        animation-delay: 0.15s;
+    }
+
+    @keyframes titleFadeUp {
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+
+    @keyframes descFadeUp {
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
     }
 `;

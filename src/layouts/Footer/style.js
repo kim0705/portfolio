@@ -6,7 +6,7 @@ export const FooterContainer = styled.footer`
     color: #888;
     text-align: center;
     border-top: 1px solid #333;
-    font-size: 0.9rem;
+    font-size: 15px;
 
     p {
         margin-bottom: 10px;
@@ -20,6 +20,6 @@ export const SocialLinks = styled.div`
   
     span {
         cursor: pointer;
-        &:hover { color: #fff; }
+        &:hover { color: #ffffff; }
     }
 `;
