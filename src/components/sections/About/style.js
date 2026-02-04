@@ -1,115 +1,114 @@
 import styled from "@emotion/styled";
 
-export const AboutContainer = styled.section`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 80px 0 100px;
+export const AboutCardContainer = styled.aside`
+    padding: 40px 0;
+    opacity: 0;
+    transform: scale(0.98);
+    animation: aboutIn 0.4s ease-out forwards;
+    animation-delay: 0.12s;
+
+    @keyframes aboutIn {
+        to {
+        opacity: 1;
+        transform: scale(1);
+        }
+    }
 `;
 
-export const AboutContent = styled.div`
-    width: 100%;
-    max-width: 1200px;
-    padding: 50px;
-    margin: 0 20px; 
-    border: 1px solid #2a2a2a;
-    border-radius: 40px;
+export const ProfileTop = styled.div`
     display: flex;
-    align-items: stretch;
-    gap: 80px;
-    background-color: #242424;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 28px;
 `;
 
 export const ImageWrapper = styled.div`
-    flex: 0 0 280px;
-    height: 280px;
+    flex: 0 0 180px;
+    height: 180px;
     
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 30px;
+        border-radius: 20px;
     }
 `;
 
-export const TextWrapper = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    text-align: left; 
-`;
-
-export const ProfileInfo = styled.div`
-    margin-bottom: 48px;
+export const NameTag = styled.div`
+    margin-top: 20px;
 
     h2 {
-        font-size: 28px;
-        color: #fff;
+        font-size: 24px;
+        color: #ffffff;
         margin-bottom: 8px;
         font-weight: 700;
     }
     p {
-        font-size: 15px;
-        color: #aaa;
-        line-height: 1.5;
+        font-size: 16px;
+        color: #007bff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
     }
 `;
 
-export const SkillSection = styled.div`
-    width: 100%;
+export const SidebarInfo = styled.div`
+    padding: 25px 0;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+`;
+
+export const InfoItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #cccccc;
+
+    span {
+        color: #777777;
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+    a {
+        color: #ffffff;
+        
+        &:hover {
+            color: #007bff;
+        }
+    }
+`;
+
+export const SidebarSkills = styled.div`
+    margin-bottom: 30px;
 
     h3 {
-        font-size: 14px;
-        color: #555;
+        font-size: 13px;
+        color: #666;
         text-transform: uppercase;
         margin-bottom: 15px;
         letter-spacing: 1px;
-        font-weight: 600;
     }
 `;
 
 export const SkillList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
 
     span {
-        padding: 8px 18px;
-        background-color: #252525; 
-        color: #fff;
-        border-radius: 50px;
-        font-size: 14px;
-        border: 1px solid #333;
-        
-        &:hover {
-            background-color: #333;
-            border-color: #555;
-        }
-    }
-`;
-
-export const ButtonWrapper = styled.div`
-    display: flex;
-    justify-content: flex-end;
-`;
-
-export const ProjectButton = styled.button`
-    margin-top: 20px;
-    background: transparent;
-    border: 1px solid #444;
-    color: #fff;
-    padding: 10px 24px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-        background: #fff;
-        color: #000;
-        border-color: #fff;
+        font-size: 12px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: #bbbbbb;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
 `;
 
@@ -130,13 +129,13 @@ export const TitleSection = styled.section`
         font-size: 56px;
         font-weight: 800;
         margin-bottom: 16px;
-        background: linear-gradient(to right, #ffffff, #888888);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
     }
     p {
-        font-size: 20px;
-        color: #aaaaaa;
+        font-size: 22px;
+        line-height: 1.6;
+        font-weight: 500;
+        color: #b5b5b5;
+        font-weight: 400;
     }
 `;
 
@@ -144,17 +143,17 @@ export const ProfileSection = styled.section`
     width: 100%;
     display: flex;
     align-items: stretch;
-    gap: 60px;
+    gap: 40px;;
     background: rgba(255, 255, 255, 0.03);
-    padding: 50px;
+    padding: 36px 40px;
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 80px;
+    margin-bottom: 40px;    
 `;
 
 export const ProfileWrapper = styled.div`
-    width: 250px;
-    height: 280px;
+    width: 200px;
+    height: 230px;
     flex-shrink: 0;
     border-radius: 30px;
     overflow: hidden;
@@ -169,38 +168,32 @@ export const ProfileWrapper = styled.div`
 
 export const ProfileDetailInfo = styled.div`
     h2 {
-        font-size: 32px;
-        margin-bottom: 10px;
+        font-size: 26px;
+        color: #f2f2f2;
+        margin-bottom: 20px;
     }
-    .intro {
-        font-size: 18px;
-        color: #007bff;
-        margin-bottom: 24px;
-        font-weight: 500;
-    }
+
     ul {
         list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 0;
+        margin-top: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        li {
-            display: flex;
-            gap: 15px;
-            font-size: 16px;
-            span {
-                width: 80px;
-                color: #666666;
-                font-weight: bold;
-            }
-            a {
-                color: #ffffff;
-                text-decoration: none;
-                &:hover {
-                    color: #007bff;
-                }
-            }
+    li {
+        position: relative;
+        padding-left: 18px;
+        font-size: 18px;
+        line-height: 2.5;
+        color: #dddddd;
+
+        &::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #4d8dff;
+            font-weight: bold;
         }
     }
 `;
@@ -216,34 +209,18 @@ export const GridItem = styled.article`
     padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease;
 
     &:hover {
-        transform: translateY(-5px);
-        background: rgba(255, 255, 255, 0.04);
+        transform: none;
+        background: rgba(255, 255, 255, 0.02);
     }
 
     h3 {
-        font-size: 24px;
+        font-size: 22px;
         margin-bottom: 20px;
-        color: #007bff;
         border-bottom: 1px solid #333333;
         padding-bottom: 10px;
-    }
-
-    .history-entry {
-        margin-bottom: 15px;
-        .date {
-            display: block;
-            font-size: 14px;
-            color: #888888;
-            margin-bottom: 5px;
-        }
-        p {
-            font-size: 16px;
-            color: #cccccc;
-            line-height: 1.6;
-        }
+        color: #4d8dff;
     }
 `;
 
@@ -267,21 +244,48 @@ export const SkillGroup = styled.div`
 export const SkillTagContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
 
     span {
-        padding: 6px 14px;
-        border-radius: 8px;
+        padding: 8px 18px;
+        border-radius: 999px;
         font-size: 14px;
         font-weight: 500;
-        background: rgba(255, 255, 255, 0.05); /* 기본 배경 */
-        color: #ccc;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.2s ease;
-
+        color: #bbbbbb;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        
         &:hover {
-            border-color: #007bff;
-            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
         }
+    }
+`;
+
+export const HistoryEntry = styled.div`
+    margin-bottom: 18px;
+    
+    span {
+        display: block;
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 6px;
+    }
+
+    strong {
+        display: block;
+        font-size: 16px;
+        color: #ffffff;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 16px;
+        color: #cccccc;
+        line-height: 1.6;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 `;

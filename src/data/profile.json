@@ -1,0 +1,99 @@
+{
+    "profile": {
+        "img": "images/profile/image.png",
+        "name": "김유진",
+        "birth": "2000.03.12",
+        "phone": "010-9304-4062",
+        "position": "Full-Stack Developer",
+        "email": "dbwls138@gmail.com",
+        "github": "https://github.com/kim0705",
+        "greeting": {
+            "main": {
+                "intro": "사용자의 경험을 기술로 연결하는 김유진입니다.",
+                "detail": "요구사항을 그대로 구현하기보다, 왜 필요한 기능인지부터 고민하는 개발자입니다. 프로젝트를 경험하며 문서에 모두 담기지 않은 맥락을 정리하고, 사용자 경험과 실제 사용 흐름을 함께 고려해 기능을 설계해 왔습니다. 기능 단위가 아닌 서비스의 흐름과 구조를 먼저 이해하는 방식으로, 더 안정적이고 오래 사용할 수 있는 시스템을 만드는 것을 목표로 합니다."
+            },
+            "about": {
+                "intro": "현실에 안주하지 않고 늘 발전하는 개발자 김유진입니다."
+            }
+        },
+        "aboutSummary": [
+            "요구사항을 그대로 구현하기보다, 왜 필요한 기능인지부터 고민합니다.",
+            "문서에 드러나지 않은 맥락과 실제 사용자 흐름을 함께 고려해 설계합니다.",
+            "기능 단위가 아닌 서비스의 구조와 흐름을 이해하며, 안정적인 시스템을 지향합니다."
+        ]
+    },
+    "education": [
+        {
+            "educationId": 1,
+            "school": "학산여자고등학교",
+            "period": "2016.03 ~ 2019.02",
+            "major": "이과계열",
+            "status": "졸업"
+        },
+        {
+            "educationId": 2,
+            "school": "한국해양대학교",
+            "period": "2019.03 ~ 2024.02",
+            "major": "전자통신전공",
+            "status": "졸업",
+            "score": "3.74/4.5"
+        },
+        {
+            "educationId": 3,
+            "school": "코리아IT아카데미",
+            "period": "2024.05 ~ 2024.11",
+            "course": "SQF기반 데이터융합 풀스텍(Spring, React) 개발자 양성 과정"
+        }
+    ],
+    "career": [
+        {
+            "careerId": 1,
+            "company": "(주)맵스코",
+            "period": "2025.02 ~ 2025.11",
+            "project": "부산디지털대학교 LMS 고도화 사업"
+        }
+    ],
+    "skills": {
+        "backend": [
+            "Java",
+            "eGovFrame based In-house Framework",
+            "JSP",
+            "Spring Boot"
+        ],
+        "frontend": [
+            "JavaScript",
+            "jQuery",
+            "React",
+            "HTML5/CSS3"
+        ],
+        "database": [
+            "Oracle",
+            "MySQL"
+        ],
+        "tools": [
+            "SVN",
+            "Git",
+            "GitHub"
+        ]
+    },
+    "certifications": [
+        {
+            "certId": 1,
+            "name": "컴퓨터활용능력 1급",
+            "date": "2023.02",
+            "status": "최종합격"
+        },
+        {
+            "certId": 2,
+            "name": "정보통신기사",
+            "date": "2023.08",
+            "status": "최종합격"
+        },
+        {
+            "certId": 3,
+            "name": "정보처리기사",
+            "date": "2024.09",
+            "status": "최종합격"
+        }
+    ]
+}

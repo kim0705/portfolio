@@ -2,57 +2,77 @@ import styled from "@emotion/styled";
 
 export const ProjectContainer = styled.section`
     width: 100%;
-    padding: 0 0 100px;
+    padding: 40px 0 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
 `;
 
 export const ProjectContent = styled.div`
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
 `;
 
 export const ProjectHeader = styled.div`
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    text-align: left;
     
     h2 { 
-        font-size: 40px; 
-        color: #fff; 
+        font-size: 32px;
+        color: #ffffff; 
         margin-bottom: 16px; 
-        font-weight: 700; 
+        font-weight: 700;
+
+         opacity: 0;
+        transform: translateY(8px);
+        animation: fadeUp 0.5s ease-out forwards;
     }
-    
-    p { 
-        font-size: 18px; 
-        color: #666; 
-    }
+
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeUp 0.5s ease-out forwards;
 `;
 
 export const ProjectCardContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
     width: 100%;
+
+    /* 반응형*/
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
 `;
 
 export const ProjectCard = styled.article`
     background-color: #242424;
-    border-radius: 40px;
+    border-radius: 24px;
     overflow: hidden;
-    border: 1px solid #2a2a2a;
-    transition: all 0.3s ease;
+    border: 2px solid #2a2a2a;
     cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
-        transform: translateY(-10px);
-        border-color: #444;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        transform: translateY(-4px);
+        border-color: rgba(0, 123, 255, 0.45);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 123, 255, 0.28);
+    }
+
+    opacity: 0;
+    transform: translateY(10x);
+    animation: fadeUp 0.55s ease-out forwards;
+
+    @keyframes fadeUp {
+        to {
+        opacity: 1;
+        }
     }
 `;
 
 export const CardImageWrapper = styled.div`
     width: 100%;
-    height: 220px;
+    height: 200px;
 
     img {
         width: 100%;
@@ -62,33 +82,58 @@ export const CardImageWrapper = styled.div`
 `;
 
 export const CardInfo = styled.div`
-    padding: 24px;
+    padding: 20px;
 
-    h3 {
-        font-size: 22px;
-        color: #fff;
-        margin-bottom: 12px;
+    span {
+        display: block;
+        font-size: 12px;
+        color: #777777;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
+    
+    h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+
     p {
-        font-size: 15px;
-        color: #aaa;
+        font-size: 14px;
+        color: #9a9a9a;
         line-height: 1.6;
-        margin-bottom: 20px;
+        margin-bottom: 14px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 
 export const TagList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 
     span {
-        font-size: 12px;
-        color: #fff;
-        background-color: #222;
-        padding: 5px 12px;
-        border-radius: 6px;
-        border: 1px solid #333;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 500;
+        background: rgba(255, 255, 255, 0.05);
+        color: #cfcfcf;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
     }
 `;
 

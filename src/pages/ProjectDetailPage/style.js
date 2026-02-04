@@ -16,23 +16,33 @@ export const ContentWrapper = styled.div`
 
 export const HeaderSection = styled.header`
     margin-bottom: 60px;
-    .category {
+    
+    span {
         color: #007bff;
         font-weight: 700;
         letter-spacing: 1px;
     }
+
     h1 {
         font-size: 42px;
         font-weight: 800;
         margin: 16px 0;
         line-height: 1.3;
-        color: #fff;
+        color: #ffffff;
     }
-    .description {
-        font-size: 18px;
-        color: #999;
-        line-height: 1.6;
+
+    p:first-of-type {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 12px;
     }
+
+    p {
+    font-size: 18px;
+    color: #999;
+    line-height: 1.6;
+    }
+
 `;
 
 export const SectionTitle = styled.h2`
@@ -41,7 +51,7 @@ export const SectionTitle = styled.h2`
     margin: 80px 0 30px 0;
     padding-left: 15px;
     border-left: 5px solid #007bff;
-    color: #fff;
+    color: #ffffff;
 `;
 
 export const TaskGrid = styled.div`
@@ -49,44 +59,46 @@ export const TaskGrid = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     
-    .task-item {
-        background: #1a1d23;
+    div {
+        background-color: #1a1d23;
         padding: 24px;
-        border-radius: 20px;
+        border-radius: 30px;
         border: 1px solid #2d3139;
         font-size: 16px;
         line-height: 1.6;
-        color: #ccc;
-        transition: transform 0.3s;
+        color: #cccccc;
+        transition: transform 0.25s ease, border-color 0.25s ease;
         
         &:hover { 
-            transform: translateY(-5px); 
-            border-color: #007bff; 
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15);
         }
     }
 `;
 
 export const RoleDetailSection = styled.section`
-    background: #16191e;
+    background-color: #1a1d23;
     padding: 40px;
     border-radius: 30px;
     border: 1px solid #2d3139;
+`;
 
-    .role-group {
-        margin-bottom: 40px;
+export const RoleGroup = styled.div`
+    margin-bottom: 40px;
 
-        h3 { 
-            color: #fff; 
-            font-size: 20px; 
-            margin-bottom: 20px; 
-        }
+    h3 {
+        color: #ffffff;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
 
-        ul li { 
-            margin-bottom: 12px; 
+    ul {
+        li {
+            margin-bottom: 12px;
             list-style: none;
             position: relative;
             padding-left: 20px;
-            color: #bbb;
+            color: #bbbbbb;
 
             &::before {
                 content: "•";
@@ -97,71 +109,77 @@ export const RoleDetailSection = styled.section`
             }
         }
     }
+`;
 
-    .role-sub-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        border-top: 1px solid #2d3139;
-        padding-top: 30px;
+export const RoleSubGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    border-top: 1px solid #2d3139;
+    padding-top: 30px;
+`;
 
-        .role-box {
-            h4 { 
-                color: #007bff; 
-                margin-bottom: 15px; 
-                font-size: 17px; 
-            }
-            
-            ul li { 
-                font-size: 15px; 
-                color: #aaa; 
-                margin-bottom: 8px; 
-                list-style: none;
-            }
-        }
+export const RoleBox = styled.div`
+    h4 {
+        color: #007bff;
+        margin-bottom: 15px;
+        font-size: 17px;
+    }
+
+    ul li {
+        font-size: 15px;
+        color: #aaaaaa;
+        margin-bottom: 8px;
+        list-style: none;
     }
 `;
 
 export const TroubleShootingCard = styled.article`
-    background: linear-gradient(145deg, #1e2229, #16191e);
-    padding: 50px;
-    border-radius: 40px;
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    background-color: #1a1d23;
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid #2d3139;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+`;
 
-    .problem {
-        margin-bottom: 35px;
-        h4 { 
-            color: #ff4d4d; 
-            margin-bottom: 12px; 
-            font-size: 18px; 
-        }
+export const ProblemSection = styled.section`
+    margin-bottom: 35px;
 
-        p { 
-            line-height: 1.7; 
-            color: #ccc; 
-        }
+    h4 {
+        color: #ff4d4d;
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
     }
 
-    .solution {
-        h4 { 
-            color: #4dff88; 
-            margin-bottom: 12px; 
-            font-size: 18px; 
-        }
+    p {
+        line-height: 1.7;
+        color: #cccccc;
+    }
+`;
 
-        ul li { 
-            color: #eee; 
-            margin-bottom: 10px; 
-            line-height: 1.6;
-            list-style: square;
-            margin-left: 20px;
+export const SolutionSection = styled.section`
+    h4 {
+        color: #4dff88;
+        margin-bottom: 12px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    ul {
+        margin-left: 20px;
+
+        li {
+        color: #bbbbbb;
+        margin-bottom: 10px;
+        line-height: 1.6;
+        list-style: square;
         }
     }
 `;
 
 export const RetrospectCard = styled.div`
-    background: #1a1d23;
+    background-color: #1a1d23;
     padding: 40px;
     border-radius: 30px;
     font-style: italic;

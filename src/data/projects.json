@@ -1,23 +1,121 @@
 [
-  {
-    "id": 1,
-    "title": "부산디지털대학교 LMS 고도화 사업",
-    "description": "기존 단일 LMS 구조를 학습 포털과 LMS로 분리하고 사용자 유형별 목적에 맞는 학습·운영 시스템 개선",
-    "keyTasks": "단일 시스템 혼재 기능 분리 및 고도화, 사용자 유형별 화면 구조 및 메뉴 체계 재정의, UI/UX 개선 및 기능 확장",
-    "team": "개발 인원 9명 (담당 역할: 요구사항 분석, 화면 흐름 설계, LMS 및 관리자 시스템 개발)",
-    "tags": ["Java", "eGovFrame", "JSP", "jQuery", "Oracle"],
-    "period": "2025년 2월 10일 ~ 2025년 11월 11일",
-    "github": "",
-    "notion": ""
-  },{
-    "id": 2,
-    "title": "Cuisson",
-    "description": "밀키트 판매 사이트",
-    "keyTasks": "jwt 기반 로그인 및 인증 / 장바구니, 찜, 결제 기능",
-    "team": "4명 (백엔드 & 프런트엔드)",
-    "tags": ["React", "Spring Boot", "Firebase", "MySQL", "node.js", "Java"],
-    "period": "2020년 10월 21일 ~ 2024년 11월 12일",
-    "github": "https://github.com/HwalChanTeam",
-    "notion": "https://www.notion.so/113f2cdc29db80298025ea607a46f500?pvs=4"
-  }
+    {
+        "projectId": 1,
+        "img": "images/projects/cuissonLogo.png",
+        "category": "Web Development (Team Project)",
+        "title": "Cuisson (퀴송)",
+        "description": "JWT 기반 인증과 결제·장바구니 기능을 중심으로 밀키트 판매 및 레시피 공유 서비스를 구현한 팀 프로젝트입니다.",
+        "period": "2024.10.21 ~ 2024.11.12",
+        "team": "4명 (백엔드 & 프런트엔드)",
+        "github": "https://github.com/HwalChanTeam",
+        "notion": "https://www.notion.so/113f2cdc29db80298025ea607a46f500?pvs=4",
+        "tasks": [
+            "JWT 기반 로그인 및 사용자 인증/권한 제어 기능 구현",
+            "장바구니·찜·결제 프로세스 연동 및 상태 관리",
+            "Firebase 기반 이미지 업로드 및 실시간 데이터 관리"
+        ],
+        "roles": [
+            {
+                "roleId": 1,
+                "groupTitle": "Backend & Authentication",
+                "details": [
+                    "Spring Boot와 JWT를 활용한 토큰 기반 인증 로직 구현",
+                    "이메일 인증, OAuth2 로그인 등 사용자 인증 플로우 설계",
+                    "상품·주문·결제·리뷰 관련 RESTful API 구현",
+                    "결제 완료 및 취소 시 주문 상태와 재고 데이터 동기화 처리"
+                ]
+            },
+            {
+                "roleId": 2,
+                "groupTitle": "Frontend & Integration",
+                "details": [
+                    "React 기반 사용자 기능(찜, 결제, 관리자 조회) 구현",
+                    "결제 요청 데이터 검증 및 결제/취소 흐름 처리",
+                    "인증 토큰 검증을 통한 API 요청 제어 로직 구현"
+                ]
+            }
+        ],
+        "troubleshooting": {
+            "problem": "JWT 인증 필터에서 비로그인 요청에도 토큰 검증이 수행되어 인증 오류가 발생하고, 결제 요청 시 데이터 타입 및 처리 순서 문제로 쿼리 오류가 발생함",
+            "solution": [
+                "토큰 값이 문자열 \"null\"로 전달되는 케이스를 분기 처리하여 인증 필터 안정화",
+                "결제 데이터 타입 정합성 검증 및 useEffect 의존성 관리로 요청 순서 개선",
+                "다중 update 쿼리에서 foreach 문법을 분리 적용하여 오류 해결"
+            ]
+        },
+        "retrospect": "인증과 결제 기능을 직접 구현하며 프런트엔드와 백엔드 간 데이터 흐름과 타입 설계의 중요성을 체감했으며, 사전 설계와 팀 커뮤니케이션이 프로젝트 완성도에 큰 영향을 미친다는 것을 배웠습니다.",
+        "techStack": [
+            "Spring Boot",
+            "Java",
+            "React",
+            "MySQL",
+            "Firebase",
+            "Git",
+            "Github"
+        ]
+    },
+    {
+        "projectId": 2,
+        "img": "images/projects/cuissonLogo.png",
+        "category": "Web Development & System Optimization",
+        "title": "부산디지털대학교 학습관리시스템(LMS) 고도화 및 분리 구축",
+        "period": "2025.02 ~ 2025.11",
+        "description": "단일 LMS 시스템을 학습 포털과 수업 운영용 LMS로 분리해 데이터 정합성과 사용자 경험을 개선한 시스템 고도화 프로젝트입니다.",
+        "tasks": [
+            "학사 행정 기능과 수업 운영 기능을 학습 포털과 LMS로 역할에 맞게 분리·재설계",
+            "학습자·교수자·운영자·관리자 유형별 화면 구조 및 메뉴 체계 개편",
+            "기존 데이터와 핵심 기능을 유지하면서 UI/UX 개선 및 기능 확장"
+        ],
+        "roles": [
+            {
+                "roleId": 1,
+                "groupTitle": "서버 및 화면 통합 개발",
+                "details": [
+                    "eGovFrame 기반 자사 프레임워크 환경에서 Java 기반 LMS 기능 개발",
+                    "기존 소스 및 테이블 구조 분석 후 요구사항 반영",
+                    "MyBatis 기반 다중 테이블 조인 SQL 설계 및 성능 개선",
+                    "JSP·jQuery를 활용한 화면 흐름 및 기능 구현"
+                ]
+            },
+            {
+                "roleId": 2,
+                "groupTitle": "주요 기능 구현",
+                "subGroups": [
+                    {
+                        "name": "학습자 LMS",
+                        "items": [
+                            "강의 영상 재생 및 학습 진행 처리",
+                            "과제·토론 기능 구현",
+                            "파일 업로드·다운로드 관리"
+                        ]
+                    },
+                    {
+                        "name": "관리자 시스템",
+                        "items": [
+                            "공통 코드 관리",
+                            "계정 및 권한 관리 기능 구현"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "troubleshooting": {
+            "problem": "출석, 수강률, 진행률이 단순 재생 시간 기준으로 계산되어 실제 학습 상태와 지표 간 불일치가 발생했습니다.",
+            "solution": [
+                "출석 미인정 상태에서는 배속 재생을 제한하도록 운영 정책 및 로직 개선",
+                "실제 영상 시청 시간을 기준으로 출석 판정 로직 재구현",
+                "분 단위 시청 데이터를 저장하도록 구조를 개선해 이어듣기 및 진행률 계산에 활용"
+            ]
+        },
+        "retrospect": "기존 시스템을 분석하고 구조를 분리하는 과정에서 기능 단위가 아닌 전체 데이터 흐름과 운영 맥락을 먼저 이해하는 설계의 중요성을 체감했습니다. 특히 여러 지표가 연결된 영역에서는 부분 수정이 아닌 기준 전반의 일관성을 함께 고민해야 한다는 개발 관점을 얻은 프로젝트였습니다.",
+        "techStack": [
+            "Java",
+            "Spring",
+            "eGovFrame based In-house Framework",
+            "JSP",
+            "jQuery",
+            "Oracle",
+            "SVN"
+        ]
+    }
 ]

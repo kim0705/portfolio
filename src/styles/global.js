@@ -6,7 +6,7 @@ export const globalStyles = css`
       width: 100%;
       background-color: #1a1a1a;
       height: 100%;
-      color: #fff;
+      color: #ffffff;
     } 
 
   /* 모든 요소에 box-sizing 적용 (패딩이 너비에 영향을 주지 않게 함) */
