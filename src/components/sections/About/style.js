@@ -1,18 +1,11 @@
 import styled from "@emotion/styled";
+import { detailPageFadeIn, scaleAppear } from "../../../styles/common";
 
 export const AboutCardContainer = styled.aside`
     padding: 40px 0;
     opacity: 0;
-    transform: scale(0.98);
-    animation: aboutIn 0.4s ease-out forwards;
+    animation: ${scaleAppear} 0.4s ease-out forwards;
     animation-delay: 0.12s;
-
-    @keyframes aboutIn {
-        to {
-        opacity: 1;
-        transform: scale(1);
-        }
-    }
 `;
 
 export const ProfileTop = styled.div`
@@ -65,20 +58,31 @@ export const SidebarInfo = styled.div`
 
 export const InfoItem = styled.div`
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: flex-start;
     align-items: center;
     font-size: 13px;
     color: #cccccc;
 
     span {
+        width: 80px;
         color: #777777;
         font-weight: 600;
         font-size: 11px;
         text-transform: uppercase;
+        flex-shrink: 0;
     }
+
+    p, a {
+        margin: 0;
+        padding-left: 10px;
+        text-align: left; 
+        flex: 1;
+    }
+
     a {
-        color: #ffffff;
-        
+        color: #cccccc;
+
         &:hover {
             color: #007bff;
         }
@@ -112,6 +116,23 @@ export const SkillList = styled.div`
     }
 `;
 
+export const MoreButton = styled.button`
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.1);
+    border: 1px dashed rgba(0, 123, 255, 0.4);
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: rgba(0, 123, 255, 0.2);
+        transform: translateY(-2px);
+    }
+`;
+
 export const AboutPageContainer = styled.main`
     width: 100%;
     max-width: 1200px;
@@ -128,13 +149,16 @@ export const TitleSection = styled.section`
     h1 {
         font-size: 56px;
         font-weight: 800;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
+        letter-spacing: -1.5px;
+        color: #ffffff;
     }
     p {
         font-size: 22px;
         line-height: 1.6;
         font-weight: 500;
-        color: #b5b5b5;
+        color: #aaaaaa;
+        margin: 0 auto;
         font-weight: 400;
     }
 `;
@@ -149,6 +173,10 @@ export const ProfileSection = styled.section`
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     margin-bottom: 40px;    
+
+    opacity: 0;
+    animation: ${scaleAppear} 0.5s ease-out forwards;
+    animation-delay: 0.1s;
 `;
 
 export const ProfileWrapper = styled.div`
@@ -169,31 +197,40 @@ export const ProfileWrapper = styled.div`
 export const ProfileDetailInfo = styled.div`
     h2 {
         font-size: 26px;
-        color: #f2f2f2;
-        margin-bottom: 20px;
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 20px;  
+        
+        svg {
+            color: #007bff;
+            font-size: 28px;
+            flex-shrink: 0;
+            margin-right: 8px;  
+        }
     }
 
     ul {
         list-style: none;
-        margin-top: 12px;
-        padding-top: 16px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 10px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     li {
         position: relative;
-        padding-left: 18px;
+        padding-left: 22px;
         font-size: 18px;
         line-height: 2.5;
-        color: #dddddd;
+        color: #cccccc;
+        margin-bottom: 10px;
 
         &::before {
             content: "•";
             position: absolute;
             left: 0;
-            top: 0;
-            color: #4d8dff;
-            font-weight: bold;
+            top: -7px;
+            color: #007bff;
+            font-size: 22px;
         }
     }
 `;
@@ -202,6 +239,10 @@ export const GridSection = styled.section`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 30px;
+    
+    opacity: 0;
+    animation: ${detailPageFadeIn} 0.5s ease-out forwards;
+    animation-delay: 0.25s;
 `;
 
 export const GridItem = styled.article`
@@ -216,11 +257,20 @@ export const GridItem = styled.article`
     }
 
     h3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         font-size: 22px;
         margin-bottom: 20px;
         border-bottom: 1px solid #333333;
         padding-bottom: 10px;
-        color: #4d8dff;
+        color: #ffffff;
+        
+        svg {
+            color: #007bff;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
     }
 `;
 
@@ -261,9 +311,9 @@ export const SkillTagContainer = styled.div`
     }
 `;
 
-export const HistoryEntry = styled.div`
+export const DetailInfoItem = styled.div`
     margin-bottom: 18px;
-    
+
     span {
         display: block;
         font-size: 14px;

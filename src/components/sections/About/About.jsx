@@ -3,11 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import profileDatas from '../../../data/profile.json';
 import { BASE_URL } from '../../../utils/asset';
+import { HiOutlineChatAlt2, HiOutlineCode, HiOutlineBriefcase, HiOutlineAcademicCap, HiOutlineBadgeCheck } from "react-icons/hi";
 
 function About({ type = "main" }) {
 
     const navigate = useNavigate();
+
     const { profile, education, career, skills, certifications } = profileDatas;
+
+    /*전체 skill*/
+    const allSkills = skills ? Object.values(skills).flat() : [];
+    /*화면에 보여주는 skill*/
+    const displaySkills = skills?.backend?.slice(0, 4) || [];
+    /*남은 skill 개수*/
+    const remainSkillsCnt = allSkills.length - displaySkills.length;
 
     /* 최신순 정렬 (ID 기반 내림차순) */
     const sortedEducation = [...education].sort((a, b) => b.educationId - a.educationId);
@@ -35,6 +44,11 @@ function About({ type = "main" }) {
                     </S.InfoItem>
 
                     <S.InfoItem>
+                        <span>Phone</span>
+                        <p>{profile?.phone}</p>
+                    </S.InfoItem>
+
+                    <S.InfoItem>
                         <span>Email</span>
                         <p>{profile?.email}</p>
                     </S.InfoItem>
@@ -48,7 +62,14 @@ function About({ type = "main" }) {
                 <S.SidebarSkills>
                     <h3>Skills</h3>
                     <S.SkillList>
-                        {skills?.backend?.slice(0, 4).map((s, i) => <span key={i}>{s}</span>)}
+                        {displaySkills.map((s, i) => (
+                            <span key={i}>{s}</span>
+                        ))}
+                        {remainSkillsCnt > 0 && (
+                            <S.MoreButton onClick={() => navigate('/portfolio/about')}>
+                                +{remainSkillsCnt}
+                            </S.MoreButton>
+                        )}
                     </S.SkillList>
                 </S.SidebarSkills>
             </S.AboutCardContainer>
@@ -66,7 +87,7 @@ function About({ type = "main" }) {
                     </S.ProfileWrapper>
 
                     <S.ProfileDetailInfo>
-                        <h2>Development Perspective</h2>
+                        <h2><HiOutlineChatAlt2 /> Development Perspective</h2>
                         <ul>
                             {profile?.aboutSummary?.map((a, i) => (
                                 <li key={i}>{a}</li>
@@ -77,59 +98,48 @@ function About({ type = "main" }) {
 
                 <S.GridSection>
                     <S.GridItem>
-                        <h3>Skills</h3>
-                        <S.SkillGroup>
-                            <h4>Backend</h4>
-                            <S.SkillTagContainer>
-                                {skills?.backend?.map((s, i) => <span key={i}>{s}</span>)}
-                            </S.SkillTagContainer>
-                        </S.SkillGroup>
-
-                        <S.SkillGroup>
-                            <h4>Frontend</h4>
-                            <S.SkillTagContainer>
-                                {skills?.frontend?.map((s, i) => <span key={i}>{s}</span>)}
-                            </S.SkillTagContainer>
-                        </S.SkillGroup>
-
-                        <S.SkillGroup>
-                            <h4>DB & Tools</h4>
-                            <S.SkillTagContainer>
-                                {skills?.database?.map((s, i) => <span key={i}>{s}</span>)}
-                                {skills?.tools?.map((s, i) => <span key={i}>{s}</span>)}
-                            </S.SkillTagContainer>
-                        </S.SkillGroup>
+                        <h3><HiOutlineCode /> Skills</h3>
+                        {Object.entries(skills)?.map(([category, items], index) => (
+                            <S.SkillGroup key={index}>
+                                <h4>{category}</h4>
+                                <S.SkillTagContainer>
+                                    {items?.map((skill, i) => (
+                                        <span key={i}>{skill}</span>
+                                    ))}
+                                </S.SkillTagContainer>
+                            </S.SkillGroup>
+                        ))}
                     </S.GridItem>
 
                     <S.GridItem>
-                        <h3>Career</h3>
+                        <h3><HiOutlineBriefcase /> Career</h3>
                         {sortedCareer.map(item => (
-                            <S.HistoryEntry key={item?.careerId}>
+                            <S.DetailInfoItem key={item?.careerId}>
                                 <span>{item?.period}</span>
                                 <strong>{item?.company}</strong>
                                 <p>{item?.project}</p>
-                            </S.HistoryEntry>
+                            </S.DetailInfoItem>
                         ))}
                     </S.GridItem>
 
                     <S.GridItem>
-                        <h3>Education</h3>
+                        <h3><HiOutlineAcademicCap /> Education</h3>
                         {sortedEducation?.map(item => (
-                            <S.HistoryEntry key={item?.educationId}>
+                            <S.DetailInfoItem key={item?.educationId}>
                                 <span>{item?.period}</span>
                                 <strong>{item?.school}</strong>
                                 <p>{item?.course || item?.major} {item?.score && `(${item?.score})`}</p>
-                            </S.HistoryEntry>
+                            </S.DetailInfoItem>
                         ))}
                     </S.GridItem>
 
                     <S.GridItem>
-                        <h3>Certificates</h3>
+                        <h3><HiOutlineBadgeCheck /> Certificates</h3>
                         {sortedCertifications?.map(item => (
-                            <S.HistoryEntry key={item?.certId}>
+                            <S.DetailInfoItem key={item?.certId}>
                                 <span>{item?.date}</span>
                                 <p>{item?.name} ({item?.status})</p>
-                            </S.HistoryEntry>
+                            </S.DetailInfoItem>
 
                         ))}
                     </S.GridItem>

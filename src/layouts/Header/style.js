@@ -19,17 +19,39 @@ export const Navigation = styled.nav`
 
     ul {
         display: flex;
+        align-items: center;
         gap: 40px; 
         list-style: none;
-        margin: 0;
-        padding: 0;
     }
-    a {
-    text-decoration: none;
-    color: inherit;         
 
-    &:hover {
-      color: #007bff;       
+    a {
+        text-decoration: none;
+        color: #b0b0b0;
+        font-weight: 600;
+        position: relative;
+        padding: 8px 0;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #ffffff; 
+        }
+
+        /* 현재 페이지일 때 적용 */
+        &.active {
+            color: #007bff;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -2px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: #007bff;
+            }
+        }
     }
-  }
 `;

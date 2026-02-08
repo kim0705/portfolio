@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './style';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
 	return (
@@ -8,24 +8,24 @@ function Header() {
 			<S.Navigation>
 				<ul>
 					<li>
-						<Link to="/portfolio">
+						<NavLink to="/portfolio" end>
 							Home
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/portfolio/about">
+						<NavLink to="/portfolio/about">
 							About
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link to="/portfolio/projects">
+						<NavLink to="/portfolio/projects">
 							Projects
-						</Link>
+						</NavLink>
 					</li>
 					{/* <li>
-						<Link to="/portfolio">
+						<NavLink to="/portfolio">
 							Contact
-						</Link>
+						</NavLink>
 					</li> */}
 				</ul>
 			</S.Navigation>
