@@ -8,6 +8,15 @@ export const MainContainer = styled.div`
     padding: 100px 50px;
     max-width: 1300px;
     margin: 0 auto;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 40px 0; 
+    }
 `;
 
 export const MainSidebar = styled.aside`
@@ -21,6 +30,15 @@ export const MainSidebar = styled.aside`
     position: sticky;
     top: 100px;
     gap: 30px;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        position: sticky;
+        height: auto;
+        width: 90%;
+        padding: 20px 30px;
+        margin: 0 auto 80px auto;
+    }
 `;
 
 export const MainContentArea = styled.main`
@@ -29,4 +47,12 @@ export const MainContentArea = styled.main`
     flex-direction: column;
     align-items: flex-start; 
     gap: 50px;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        align-items: center;
+    }
 `;

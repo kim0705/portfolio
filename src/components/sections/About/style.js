@@ -14,6 +14,14 @@ export const ProfileTop = styled.div`
     align-items: center;
     text-align: center;
     margin-bottom: 28px;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        flex-direction: row;
+        justify-content: center;
+        text-align: left;
+        gap: 25px;
+    }
 `;
 
 export const ImageWrapper = styled.div`
@@ -54,11 +62,18 @@ export const SidebarInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 15px 20px;
+        padding: 20px 10px;
+    }
 `;
 
 export const InfoItem = styled.div`
     display: flex;
-    /* justify-content: space-between; */
     justify-content: flex-start;
     align-items: center;
     font-size: 13px;
@@ -77,14 +92,91 @@ export const InfoItem = styled.div`
         margin: 0;
         padding-left: 10px;
         text-align: left; 
-        flex: 1;
+    }
+`;
+
+export const EmailWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    svg {
+        margin-left: 8px;
+        cursor: pointer;
+        color: #aaaaaa;
+        font-size: 16px;
+        transition: color 0.2s;
+        cursor: pointer;
+        position: relative;
+        top: 2px;
+    }
+    
+    /* PC 환경에서만 적용 */
+    @media (hover: hover) {
+        &:hover {
+            p {
+                color: #007bff;
+                text-decoration: underline;
+            }
+            svg {
+                color: #007bff;
+            }
+        }
     }
 
-    a {
-        color: #cccccc;
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        &:active {
+            opacity: 0.7;
+            p {
+                color: #007bff;
+            }
+        }
+    }
+`;
 
+export const GithubWrapper = styled.a`
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #cccccc;
+    text-decoration: none;
+
+    p {
+        padding-left: 0;
+    }
+
+    svg {
+        margin-left: 8px;
+        cursor: pointer;
+        color: #aaaaaa;
+        font-size: 16px;
+        transition: color 0.2s;
+        cursor: pointer;
+        position: relative;
+        top: 2px;
+    }
+    
+    /* PC 환경에서만 적용 */
+    @media (hover: hover) {
         &:hover {
-            color: #007bff;
+            p {
+                color: #007bff;
+                text-decoration: underline;
+            }
+            svg {
+                color: #007bff;
+            }
+        }
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        &:active {
+            opacity: 0.7;
+            p {
+                color: #007bff;
+            }
         }
     }
 `;
@@ -98,6 +190,11 @@ export const SidebarSkills = styled.div`
         text-transform: uppercase;
         margin-bottom: 15px;
         letter-spacing: 1px;
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        display: none;
     }
 `;
 
@@ -140,6 +237,14 @@ export const AboutPageContainer = styled.main`
     display: flex;
     flex-direction: column;
     color: #ffffff;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        height: auto;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 export const TitleSection = styled.section`
@@ -160,6 +265,11 @@ export const TitleSection = styled.section`
         color: #aaaaaa;
         margin: 0 auto;
         font-weight: 400;
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        margin-bottom: 20px;
     }
 `;
 
@@ -251,11 +361,6 @@ export const GridItem = styled.article`
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
 
-    &:hover {
-        transform: none;
-        background: rgba(255, 255, 255, 0.02);
-    }
-
     h3 {
         display: flex;
         align-items: center;
@@ -305,8 +410,11 @@ export const SkillTagContainer = styled.div`
         border: 1px solid rgba(255, 255, 255, 0.08);
         background: rgba(255, 255, 255, 0.04);
         
-        &:hover {
-            background: rgba(255, 255, 255, 0.08);
+        /* PC 환경에서만 적용 */
+        @media (hover: hover) {
+            &:hover {
+                background: rgba(255, 255, 255, 0.08);
+            }
         }
     }
 `;

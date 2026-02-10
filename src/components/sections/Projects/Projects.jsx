@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import projectsData from '../../../data/projects.json';
 import { BASE_URL } from '../../../utils/asset';
 import { DEFAULT_IMAGE } from '../../../utils/asset';
+import { HiOutlineFolderOpen } from "react-icons/hi2";
 
 function Projects({ type = "main" }) {
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ function Projects({ type = "main" }) {
             <S.ProjectContainer>
                 <S.ProjectContent>
                     <S.ProjectHeader>
-                        <h2>Projects</h2>
+                        <h2><HiOutlineFolderOpen /> Projects</h2>
                     </S.ProjectHeader>
 
                     <S.ProjectCardContainer>

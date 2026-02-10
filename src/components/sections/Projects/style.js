@@ -6,6 +6,11 @@ export const ProjectContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        display: none;
+    }
 `;
 
 export const ProjectContent = styled.div`
@@ -14,13 +19,22 @@ export const ProjectContent = styled.div`
 `;
 
 export const ProjectHeader = styled.div`
-    text-align: left;
-    margin-bottom: 16px; 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
     
     h2 { 
+        margin: 0;
         font-size: 28px;
-        color: #bcbcbc;
+        color: #e0e0e0;
         font-weight: 600;
+    }
+
+    svg {
+        color: #007bff;
+        font-size: 28px;
+        flex-shrink: 0;
     }
 `;
 
@@ -57,10 +71,22 @@ export const ProjectCard = styled.article`
         flex: 1;
     }
 
-    &:hover {
-        transform: translateY(-12px);
-        border-color: rgba(0, 123, 255, 0.45);
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 123, 255, 0.28);
+    /* PC 환경에서만 적용 */
+    @media (hover: hover) {
+        &:hover {
+            transform: translateY(-12px);
+            border-color: rgba(0, 123, 255, 0.45);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 123, 255, 0.28);
+        }
+    }
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        &:active {
+        transform: scale(0.97); 
+        background: rgba(255, 255, 255, 0.05);
+        transition: transform 0.1s; 
+        }
     }
 `;
 
@@ -157,6 +183,14 @@ export const ProjectPageContainer = styled.div`
     display: flex;
     flex-direction: column;
     color: #ffffff;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        height: auto;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
 export const TitleSection = styled.section`
@@ -185,4 +219,11 @@ export const ProjectGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     align-items: start;
-`;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        height: auto;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px; 
+    }
+`;  

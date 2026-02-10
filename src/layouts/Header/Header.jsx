@@ -1,24 +1,30 @@
 import React from 'react';
 import * as S from './style';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function Header() {
+
+	const { pathname } = useLocation();
+
 	return (
 		<S.HeaderContainer>
 			<S.Navigation>
 				<ul>
 					<li>
-						<NavLink to="/portfolio" end>
+						<NavLink
+							to="/portfolio/" end>
 							Home
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/portfolio/about">
+						<NavLink 
+							to="/portfolio/about">
 							About
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/portfolio/projects">
+						<NavLink 
+							to="/portfolio/projects">
 							Projects
 						</NavLink>
 					</li>

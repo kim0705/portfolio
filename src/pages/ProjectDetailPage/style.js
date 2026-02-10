@@ -26,16 +26,32 @@ export const HeaderSection = styled.header`
         display: inline-flex;
         align-self: flex-end;
         align-items: center;
-        margin-bottom: -10px;
-        gap: 5px;
-        color: #666666;
+        gap: 8px;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1); 
+        border-radius: 20px;
+        color: #aaaaaa;
         font-size: 13px;
+        font-weight: 500;
         cursor: pointer;
         transition: all 0.2s ease;
 
-        &:hover { 
-            color: #ffffff; 
-            transform: translateX(-5px);
+        /* PC 환경에서만 적용 */
+        @media (hover: hover) {
+            &:hover { 
+                color: #ffffff; 
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateX(-5px);
+            }
+        }
+
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            &:active {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(0.98);
+            }
         }
     }
     
@@ -58,40 +74,53 @@ export const HeaderSection = styled.header`
         color: #ffffff;
     }
 
-    /* 참여 기간 & 인원 */
-    > div:nth-of-type(1) {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: 0;
-        gap: 16px;
-        font-size: 14px;
+    /* 설명글 */
+    p {
+        padding: 24px 30px;
+        margin-top: 30px;
+        font-size: 17px;
+        color: #d1d5db;
+        line-height: 1.8;
         font-weight: 500;
-        color: #a0a0a0;
+        border-left: 4px solid #007bff;
+        border-radius: 0 12px 12px 0;
+        background: rgba(0, 123, 255, 0.05);
+    }
+`;
 
-        span {
-            display: flex;
-            align-items: center; 
-            gap: 6px; 
+export const ProjectOverview = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0;
+    gap: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #a0a0a0;
 
-            svg {
-                font-size: 16px;
-                color: #64748b;
-                display: block; 
-            }
-        }
+    /* 참여 기간 & 인원 */
+    span {
+        display: flex;
+        align-items: center; 
+        gap: 6px; 
 
-        span + span {
-            &::before {
-                content: "|";
-                margin-right: 15px;
-                color: #444444; 
-                pointer-events: none;
-            }
+        svg {
+            font-size: 16px;
+            color: #64748b;
+            display: block; 
         }
     }
 
-    /* 링크 */
+    span + span {
+        &::before {
+            content: "|";
+            margin-right: 15px;
+            color: #444444; 
+            pointer-events: none;
+        }
+    }
+
+    /* 링크(GitHub/Notion) */
     a {
         display: flex;
         align-items: center;
@@ -117,19 +146,6 @@ export const HeaderSection = styled.header`
             color: #64748b;
             display: block;
         }
-    }
-
-    /* 설명글 */
-    p {
-        padding: 24px 30px;
-        margin-top: 30px;
-        font-size: 17px;
-        color: #d1d5db;
-        line-height: 1.8;
-        font-weight: 500;
-        border-left: 4px solid #007bff;
-        border-radius: 0 12px 12px 0;
-        background: rgba(0, 123, 255, 0.05);
     }
 `;
 
@@ -207,9 +223,12 @@ export const TaskGrid = styled.div`
         color: #e2e8f0;
         transition: transform 0.25s ease, border-color 0.25s ease;
         
-        &:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15);
+        /* PC 환경에서만 적용 */
+        @media (hover: hover) {
+            &:hover { 
+                transform: translateY(-4px); 
+                box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15);
+            }
         }
     }
 `;
