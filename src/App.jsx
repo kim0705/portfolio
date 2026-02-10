@@ -6,8 +6,8 @@ import { Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage/AboutPage';
 import ProjectPage from './pages/ProjectPage/ProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
-import PageSliderLayout from './layouts/PageSliderLayout/PageSliderLayout.JSX';
 import { useEffect, useState } from 'react';
+import PageSliderLayout from './layouts/PageSliderLayout/PageSliderLayout';
 
 function App() {
 
