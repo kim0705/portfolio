@@ -27,15 +27,15 @@ function App() {
             <Routes>
                 {isMobile ? (
                     <Route element={<MainLayout />}>
-                        <Route path="/portfolio/*" element={<PageSliderLayout />} />
-                        <Route path="/portfolio/projects/:projectId" element={<ProjectDetailPage/>}/>
+                        <Route path="/*" element={<PageSliderLayout />} />
+                        <Route path="/projects/:projectId" element={<ProjectDetailPage/>}/>
                     </Route>
                 ) : (
                     <Route element={<MainLayout />}>
-                        <Route path="/portfolio" element={<MainPage />} />
-                        <Route path="/portfolio/about" element={<AboutPage />} />
-                        <Route path="/portfolio/projects" element={<ProjectPage />} />
-                        <Route path="/portfolio/projects/:projectId" element={<ProjectDetailPage />} />
+                        <Route path="" element={<MainPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/projects" element={<ProjectPage />} />
+                        <Route path="/projects/:projectId" element={<ProjectDetailPage />} />
                     </Route>
                 )}
             </Routes>

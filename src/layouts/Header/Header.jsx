@@ -12,24 +12,24 @@ function Header() {
 				<ul>
 					<li>
 						<NavLink
-							to="/portfolio/" end>
+							to="/" end>
 							Home
 						</NavLink>
 					</li>
 					<li>
 						<NavLink 
-							to="/portfolio/about">
+							to="/about">
 							About
 						</NavLink>
 					</li>
 					<li>
 						<NavLink 
-							to="/portfolio/projects">
+							to="/projects">
 							Projects
 						</NavLink>
 					</li>
 					{/* <li>
-						<NavLink to="/portfolio">
+						<NavLink to="">
 							Contact
 						</NavLink>
 					</li> */}

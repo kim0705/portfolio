@@ -16,7 +16,7 @@ function PageSliderLayout() {
     /* Swiper 인스턴스 상태 */
     const [swiper, setSwiper] = useState(null);
 
-    const routes = ['/portfolio/', '/portfolio/about', '/portfolio/projects'];
+    const routes = ['/', '/about', '/projects'];
 
     /* URL 경로가 변경될 때마다 해당 경로에 맞는 슬라이드로 이동 */
     useEffect(() => {

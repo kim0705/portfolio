@@ -99,7 +99,7 @@ function About({ type = "main" }) {
                                 <span key={i}>{s}</span>
                             ))}
                             {remainSkillsCnt > 0 && (
-                                <S.MoreButton onClick={() => navigate('/portfolio/about')}>
+                                <S.MoreButton onClick={() => navigate('/about')}>
                                     +{remainSkillsCnt}
                                 </S.MoreButton>
                             )}

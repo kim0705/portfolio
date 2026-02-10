@@ -29,7 +29,7 @@ function Projects({ type = "main" }) {
 
     /* 상세 페이지 이동 */
     const projectDetailOnClick = (id) => {
-        navigate(`/portfolio/projects/${id}`);
+        navigate(`/projects/${id}`);
     };
 
     return (
