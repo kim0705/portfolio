@@ -24,7 +24,7 @@ function ProjectDetailPage() {
                     <span>{project?.category}</span>
                     <h1>{project?.title}</h1>
 
-                    <div>
+                    <S.ProjectOverview>
                         <span><FiCalendar />참여 기간: {project?.period}</span>
                         <span><FiUsers />개발 인원: {project?.team}</span>
 
@@ -39,7 +39,7 @@ function ProjectDetailPage() {
                                 <FiShare /> Notion
                             </a>
                         )}
-                    </div>
+                    </S.ProjectOverview>
 
                     <p>{project?.description}</p>
                 </S.HeaderSection>

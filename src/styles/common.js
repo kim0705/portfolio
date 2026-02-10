@@ -44,3 +44,19 @@ export const scaleAppear = keyframes`
         transform: scale(1);
     }
 `;
+
+const rotate = keyframes`
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+`;
+
+/* 로딩 스피너 */
+export const LoadingSpinner = styled.div`
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(88, 166, 255, 0.3);
+    border-top: 2px solid #58a6ff;
+    border-radius: 50%;
+    animation: ${rotate} 0.8s linear infinite;
+    display: inline-block;
+`;

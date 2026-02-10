@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import profileDatas from '../../../data/profile.json';
 import { BASE_URL } from '../../../utils/asset';
-import { HiOutlineChatAlt2, HiOutlineCode, HiOutlineBriefcase, HiOutlineAcademicCap, HiOutlineBadgeCheck } from "react-icons/hi";
+import { HiOutlineMail, HiOutlineChatAlt2, HiOutlineCode, HiOutlineBriefcase, HiOutlineAcademicCap, HiOutlineBadgeCheck } from "react-icons/hi";
+import { FiGithub } from "react-icons/fi";
+import { sendEmailService } from '../../../utils/emailService';
+import MailModal from '../../common/modal/MailModal/MailModal';
 
 function About({ type = "main" }) {
 
@@ -23,56 +26,94 @@ function About({ type = "main" }) {
     const sortedCertifications = [...certifications].sort((a, b) => b.certId - a.certId);
     const sortedCareer = [...career].sort((a, b) => b.careerId - a.careerId);
 
+    /* 메일 모달 열림 상태 */
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    /* 메일 전송 상태 */
+    const [isSending, setIsSending] = useState(false);
+
+    /* 메일 전송 */
+    const emailOnClick = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleSendMail = async (formData) => {
+        setIsSending(true);
+        try {
+            await sendEmailService(formData);
+            alert("메시지가 성공적으로 전달되었습니다!");
+            setIsModalOpen(false);
+        } catch (err) {
+            alert("전송에 실패했습니다. 다시 시도해주세요.");
+        } finally {
+            setIsSending(false);
+        }
+    };
+
     return (
         type === "main" ? (
             /* 1. 메인 페이지용 (MainPage) */
-            <S.AboutCardContainer>
-                <S.ProfileTop>
-                    <S.ImageWrapper>
-                        <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
-                    </S.ImageWrapper>
-                    <S.NameTag>
-                        <h2>{profile?.name}</h2>
-                        <p>Flexible Developer</p>
-                    </S.NameTag>
-                </S.ProfileTop>
+            <>
+                <S.AboutCardContainer>
+                    <S.ProfileTop>
+                        <S.ImageWrapper>
+                            <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
+                        </S.ImageWrapper>
+                        <S.NameTag>
+                            <h2>{profile?.name}</h2>
+                            <p>Flexible Developer</p>
+                        </S.NameTag>
+                    </S.ProfileTop>
 
-                <S.SidebarInfo>
-                    <S.InfoItem>
-                        <span>Birth</span>
-                        <p>{profile?.birth}</p>
-                    </S.InfoItem>
+                    <S.SidebarInfo>
+                        <S.InfoItem>
+                            <span>Birth</span>
+                            <p>{profile?.birth}</p>
+                        </S.InfoItem>
 
-                    <S.InfoItem>
-                        <span>Phone</span>
-                        <p>{profile?.phone}</p>
-                    </S.InfoItem>
+                        <S.InfoItem>
+                            <span>Phone</span>
+                            <p>{profile?.phone}</p>
+                        </S.InfoItem>
 
-                    <S.InfoItem>
-                        <span>Email</span>
-                        <p>{profile?.email}</p>
-                    </S.InfoItem>
+                        <S.InfoItem>
+                            <span>Email</span>
+                            <S.EmailWrapper onClick={emailOnClick}>
+                                <p>{profile?.email}</p>
+                                <HiOutlineMail />
+                            </S.EmailWrapper>
+                        </S.InfoItem>
 
-                    <S.InfoItem>
-                        <span>Github</span>
-                        <a href={profile?.github} target="_blank" rel="noreferrer">Link</a>
-                    </S.InfoItem>
-                </S.SidebarInfo>
+                        <S.InfoItem>
+                            <span>Github</span>
+                            <S.GithubWrapper href={profile?.github} target="_blank" rel="noreferrer">
+                                <p>Link</p>
+                                <FiGithub />
+                            </S.GithubWrapper>
+                        </S.InfoItem>
+                    </S.SidebarInfo>
 
-                <S.SidebarSkills>
-                    <h3>Skills</h3>
-                    <S.SkillList>
-                        {displaySkills.map((s, i) => (
-                            <span key={i}>{s}</span>
-                        ))}
-                        {remainSkillsCnt > 0 && (
-                            <S.MoreButton onClick={() => navigate('/portfolio/about')}>
-                                +{remainSkillsCnt}
-                            </S.MoreButton>
-                        )}
-                    </S.SkillList>
-                </S.SidebarSkills>
-            </S.AboutCardContainer>
+                    <S.SidebarSkills>
+                        <h3>Skills</h3>
+                        <S.SkillList>
+                            {displaySkills.map((s, i) => (
+                                <span key={i}>{s}</span>
+                            ))}
+                            {remainSkillsCnt > 0 && (
+                                <S.MoreButton onClick={() => navigate('/portfolio/about')}>
+                                    +{remainSkillsCnt}
+                                </S.MoreButton>
+                            )}
+                        </S.SkillList>
+                    </S.SidebarSkills>
+                </S.AboutCardContainer>
+
+                <MailModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onSend={handleSendMail}
+                    isSending={isSending}
+                />
+            </>
         ) : (
             /* 2. 상세 페이지용 (AboutPage) */
             <S.AboutPageContainer>

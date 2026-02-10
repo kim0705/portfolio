@@ -10,35 +10,19 @@ export const HeroContainer = styled.section`
     padding: 90px 70px 60px;
     overflow: hidden;
 
-    /* 왼쪽 상단 큰 따옴표 */
-    &::before {
-        content: '“';
-        position: absolute;
-        top: 20px; 
-        left: 30px; 
-        font-size: 160px;
-        font-family: 'Georgia', serif;
-        color: rgba(0, 123, 255, 0.09);
-        line-height: 1;
-    }
-
-    /* 오른쪽 하단 큰 따옴표 */
-    &::after {
-        content: '”';
-        position: absolute;
-        bottom: -20px; 
-        right: 30px;   
-        font-size: 160px;
-        font-family: 'Georgia', serif; 
-        color: rgba(0, 123, 255, 0.09);
-        line-height: 1;
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        padding: 60px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 `;
 
 export const HeroContent = styled.div`
     position: relative;
     z-index: 1;
-
+    
     h2 {
         font-size: 36px;
         line-height: 1.4;
@@ -48,6 +32,13 @@ export const HeroContent = styled.div`
         opacity: 0;
         animation: ${mainPageFadeUp} 0.6s ease-out forwards;
         animation-delay: 0.2s;
+
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            font-size: 28px;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
     }
 
     p {
@@ -60,5 +51,13 @@ export const HeroContent = styled.div`
         opacity: 0;
         animation: ${mainPageFadeUp} 0.6s ease-out forwards;
         animation-delay: 0.35s;
+
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-top: 24px;
+            word-break: keep-all;
+        }
     }
 `;
