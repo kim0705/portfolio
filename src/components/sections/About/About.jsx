@@ -49,6 +49,9 @@ function About({ type = "main" }) {
         }
     };
 
+    console.log(BASE_URL);
+console.log(profile?.img);
+
     return (
         type === "main" ? (
             /* 1. 메인 페이지용 (MainPage) */
@@ -56,8 +59,7 @@ function About({ type = "main" }) {
                 <S.AboutCardContainer>
                     <S.ProfileTop>
                         <S.ImageWrapper>
-                            {/* <img src={`${BASE_URL}${profile?.img}`} alt="profile" /> */}
-                            <img src={profile?.img ? `/${profile.img.replace(/^\//, "")}` : ""} alt="profile" />
+                            <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
                         </S.ImageWrapper>
                         <S.NameTag>
                             <h2>{profile?.name}</h2>
