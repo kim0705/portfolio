@@ -56,7 +56,8 @@ function About({ type = "main" }) {
                 <S.AboutCardContainer>
                     <S.ProfileTop>
                         <S.ImageWrapper>
-                            <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
+                            {/* <img src={`${BASE_URL}${profile?.img}`} alt="profile" /> */}
+                            <img src={BASE_URL + profile.img} alt="profile" />
                         </S.ImageWrapper>
                         <S.NameTag>
                             <h2>{profile?.name}</h2>
