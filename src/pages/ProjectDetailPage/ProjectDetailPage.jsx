@@ -17,7 +17,7 @@ function ProjectDetailPage() {
         <S.DetailPageLayout>
             <S.ContentWrapper>
                 <S.HeaderSection>
-                    <span onClick={() => navigate(-1)}>
+                    <span onClick={() => navigate('/projects')}>
                         <FiArrowLeft /> Back to Projects
                     </span>
 
