@@ -49,9 +49,6 @@ function About({ type = "main" }) {
         }
     };
 
-    console.log(BASE_URL);
-console.log(profile?.img);
-
     return (
         type === "main" ? (
             /* 1. 메인 페이지용 (MainPage) */
