@@ -1,6 +1,6 @@
 {
     "profile": {
-        "img": "images/profile/image.png",
+        "img": "/images/profile/image.png",
         "name": "김유진",
         "birth": "2000.03.12",
         "phone": "010-9304-4062",
