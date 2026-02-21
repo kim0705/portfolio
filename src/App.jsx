@@ -8,7 +8,7 @@ import ProjectPage from './pages/ProjectPage/ProjectPage';
 import ProjectDetailPage from './pages/ProjectDetailPage/ProjectDetailPage';
 import { useEffect, useState } from 'react';
 import PageSliderLayout from './layouts/PageSliderLayout/PageSliderLayout';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
 
