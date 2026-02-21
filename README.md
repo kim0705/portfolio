@@ -1,16 +1,34 @@
-# React + Vite
+# 📑 Portfolio (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **React와 Vite를 활용하여 제작한 개인 포트폴리오 사이트 저장소입니다.**
+> 
+> **Link:** https://portfolio-cyan-one-81.vercel.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🛠 Tech Stack
+- **Frontend**: React
+- **Build Tool**: Vite
+- **Styling**: Emotion (@emotion/styled)
+- **Deployment**: Vercel
 
-## React Compiler
+### 💻 Portfolio Contents
+- **Home - Floating Profile Side-tab**
+  - 인적 사항과 SNS 링크를 제공하는 네임택 UI 구현
+  - 프로필 이미지, 연락처, 주요 기술 스택(Skills) 태그를 컴포넌트화
+- **About**
+  - 개발 가치관(Perspective), 보유 기술(Skills), 업무 경력(Career)을 카드 레이아웃으로 구조화
+- **Projects & Detail Page**
+  - **Preview Card**: 프로젝트별 썸네일과 요약 정보를 담은 카드 레이아웃 구현
+  - **Detail View**: 프로젝트별 기술 스택, 담당 역할, 핵심 로직 및 트러블슈팅 사례를 상세히 기록한 상세 페이지 연결
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+### ✍️ Note
+* 본 사이트는 **PC 환경**에 최적화되어 제작되었습니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+### ✉️ Contact
+- **Email**: dbwls138@gmail.com
+- **GitHub**: https://github.com/kim0705
