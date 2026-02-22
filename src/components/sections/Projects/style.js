@@ -72,7 +72,7 @@ export const ProjectCard = styled.article`
     }
 
     /* PC 환경에서만 적용 */
-    @media (hover: hover) {
+    @media (hover: hover) and (pointer: fine) {
         &:hover {
             transform: translateY(-12px);
             border-color: rgba(0, 123, 255, 0.45);
@@ -83,9 +83,9 @@ export const ProjectCard = styled.article`
     /* 반응형 */
     @media (max-width: 1024px) {
         &:active {
-        transform: scale(0.97); 
-        background: rgba(255, 255, 255, 0.05);
-        transition: transform 0.1s; 
+            transform: scale(0.97); 
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.1s; 
         }
     }
 `;
