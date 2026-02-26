@@ -58,13 +58,15 @@
             "Java",
             "eGovFrame based In-house Framework",
             "JSP",
-            "Spring Boot / Spring Framework"
+            "Spring Boot",
+            "Spring Framework"
         ],
         "frontend": [
             "JavaScript",
             "jQuery",
             "React",
-            "HTML5/CSS3"
+            "HTML5",
+            "CSS3"
         ],
         "database/tools": [
             "Tibero",
