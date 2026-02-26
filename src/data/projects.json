@@ -57,7 +57,7 @@
             {
                 "category": "Backend",
                 "skills": [
-                    "Spring Boot / Spring Framework",
+                    "Spring Boot",
                     "Java",
                     "MyBatis",
                     "JWT / OAuth2"
