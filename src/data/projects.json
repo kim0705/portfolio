@@ -8,7 +8,7 @@
         "period": "2024.10.21 ~ 2024.11.12",
         "team": "4명 (백엔드 & 프런트엔드)",
         "github": "https://github.com/HwalChanTeam",
-        "notion": "https://www.notion.so/113f2cdc29db80298025ea607a46f500?pvs=4",
+        "notion": "https://tulip-doom-480.notion.site/313dbec1635681c6b2fec0d5de103e22",
         "tasks": [
             "JWT/OAuth2 통합 인증 체계 및 Role 기반 권한 제어 시스템 구축",
             "장바구니·찜 기능의 실시간 상태 관리 및 데이터 동기화 최적화",
