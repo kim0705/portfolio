@@ -73,7 +73,7 @@ function Projects({ type = "main" }) {
             <S.ProjectPageContainer>
                 <S.TitleSection>
                     <h1>My Projects</h1>
-                    <p>프론트엔드 및 백엔드 기술을 활용한 프로젝트 결과물입니다.</p>
+                    <p>백엔드 및 프론트엔드 기술을 활용한 프로젝트 결과물입니다.</p>
                 </S.TitleSection>
 
                 <S.ProjectGrid>

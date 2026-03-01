@@ -60,7 +60,7 @@ function About({ type = "main" }) {
                         </S.ImageWrapper>
                         <S.NameTag>
                             <h2>{profile?.name}</h2>
-                            <p>Flexible Developer</p>
+                            <p>{profile?.position}</p>
                         </S.NameTag>
                     </S.ProfileTop>
 

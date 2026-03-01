@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import projectsData from '../../data/projects.json';
 import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiChevronsRight } from "react-icons/fi";
+import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
+import { flowData } from '../../utils/flowData';
+import { BASE_URL } from '../../utils/asset';
 
 function ProjectDetailPage() {
 
@@ -43,6 +46,14 @@ function ProjectDetailPage() {
 
                     <p>{project?.description}</p>
                 </S.HeaderSection>
+
+                {project?.images?.length > 0 && (
+                    <S.ProjectImagesSection>
+                        {project?.images?.map((img, idx) => (
+                            <img key={idx} src={`${BASE_URL}${img}`} alt={project?.title} />
+                        ))}
+                    </S.ProjectImagesSection>
+                )}
 
                 <S.TechStackSection>
                     {project?.techStack?.map((group, i) => (
@@ -90,6 +101,13 @@ function ProjectDetailPage() {
                     ))}
                 </S.RoleDetailSection>
 
+                {flowData[project?.projectId] && (
+                    <>
+                        <S.SectionTitle><FiZap /> 핵심 로직 설계</S.SectionTitle>
+                        <ProjectFlow projectId={project?.projectId} />
+                    </>
+                )}
+
                 <S.SectionTitle><FiCheckCircle /> 문제 해결</S.SectionTitle>
                 <S.TroubleShootingCard>
                     <S.ProblemSection>
@@ -103,7 +121,7 @@ function ProjectDetailPage() {
                     </S.ProblemSection>
 
                     <S.SolutionSection>
-                        <h4>[해결 방안 및 결과]</h4>
+                        <h4>[해결 방안]</h4>
                         <ul>
                             {project?.troubleshooting?.solution?.map((s, i) => <li key={i}>{s}</li>)}
                         </ul>

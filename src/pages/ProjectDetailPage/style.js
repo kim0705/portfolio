@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import React from "react";
 
 export const DetailPageLayout = styled.main`
     width: 100%;
@@ -146,6 +147,25 @@ export const ProjectOverview = styled.div`
             color: #64748b;
             display: block;
         }
+    }
+`;
+
+export const ProjectImagesSection = styled.div`
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    margin: 20px 0;
+    padding-bottom: 10px;
+
+    justify-content: ${(props) =>
+        props.children.length === 1 ? 'center' : 'flex-start'};
+
+    img {
+        border-radius: 24px;
+        object-fit: cover;
+        flex-shrink: 0;
+        width: 100%;
+        height: auto;
     }
 `;
 

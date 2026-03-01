@@ -59,7 +59,8 @@
             "eGovFrame based In-house Framework",
             "JSP",
             "Spring Boot",
-            "Spring Framework"
+            "Spring Framework",
+            "MyBatis"
         ],
         "frontend": [
             "JavaScript",
