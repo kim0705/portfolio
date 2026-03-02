@@ -66,7 +66,7 @@ function ProjectDetailPage() {
                             return (
                                 <S.MediaContainer key={idx} $isVisible={isVisible}>
                                     {/* 로딩 중 스켈레톤 표시 */}
-                                    {!isVisible && <S.Skeleton />}
+                                    {!isVisible && <C.Skeleton />}
                                     <img
                                         src={mediaSrc}
                                         alt={project?.title}

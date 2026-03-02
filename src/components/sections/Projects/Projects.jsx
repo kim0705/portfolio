@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style';
+import * as C from '../../../styles/common';
 import { useNavigate } from 'react-router-dom';
 import projectsData from '../../../data/projects.json';
 import { BASE_URL } from '../../../utils/asset';
@@ -7,7 +8,9 @@ import { DEFAULT_IMAGE } from '../../../utils/asset';
 import { HiOutlineFolderOpen } from "react-icons/hi2";
 
 function Projects({ type = "main" }) {
+
     const navigate = useNavigate();
+    const [isLoaded, setIsLoaded] = useState(false);
 
     /* 최신순 정렬 (ID 기반 내림차순) */
     const sortedProjects = [...projectsData].sort((a, b) => b.projectId - a.projectId);
@@ -46,7 +49,12 @@ function Projects({ type = "main" }) {
                             <S.CardAnimationWrapper key={project?.projectId}>
                                 <S.ProjectCard onClick={() => projectDetailOnClick(project?.projectId)}>
                                     <S.CardImageWrapper>
-                                        <img src={project?.img ? `${BASE_URL}${project?.img}` : `${BASE_URL}${DEFAULT_IMAGE}`} alt={project?.title} />
+                                        {!isLoaded && <C.Skeleton />}
+                                        <img
+                                            src={project?.img ? `${BASE_URL}${project?.img}` : `${BASE_URL}${DEFAULT_IMAGE}`}
+                                            alt={project?.title}
+                                            onLoad={() => setIsLoaded(true)}
+                                        />
                                     </S.CardImageWrapper>
 
                                     <S.CardInfo type="main">
@@ -81,8 +89,14 @@ function Projects({ type = "main" }) {
                         <S.CardAnimationWrapper key={project?.projectId}>
                             <S.ProjectCard onClick={() => projectDetailOnClick(project?.projectId)}>
                                 <S.CardImageWrapper>
-                                    <img src={project?.img ? `${BASE_URL}${project?.img}` : `${BASE_URL}${DEFAULT_IMAGE}`} alt={project?.title} />
+                                    {!isLoaded && <C.Skeleton />}
+                                    <img
+                                        src={project?.img ? `${BASE_URL}${project?.img}` : `${BASE_URL}${DEFAULT_IMAGE}`}
+                                        alt={project?.title}
+                                        onLoad={() => setIsLoaded(true)}
+                                    />
                                 </S.CardImageWrapper>
+
                                 <S.CardInfo type="detail">
                                     <span>{project?.category}</span>
                                     <h3>{project?.title}</h3>

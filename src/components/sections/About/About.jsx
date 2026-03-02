@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
+import * as C from '../../../styles/common'
 import profileDatas from '../../../data/profile.json';
 import { BASE_URL } from '../../../utils/asset';
 import { HiOutlineMail, HiOutlineChatAlt2, HiOutlineCode, HiOutlineBriefcase, HiOutlineAcademicCap, HiOutlineBadgeCheck } from "react-icons/hi";
@@ -11,6 +12,8 @@ import MailModal from '../../common/modal/MailModal/MailModal';
 function About({ type = "main" }) {
 
     const navigate = useNavigate();
+
+    const [isImgLoaded, setIsImgLoaded] = useState(false);
 
     const { profile, education, career, skills, certifications } = profileDatas;
 
@@ -30,6 +33,11 @@ function About({ type = "main" }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     /* 메일 전송 상태 */
     const [isSending, setIsSending] = useState(false);
+
+    /* 페이지 타입(main/detail)이 바뀔 때마다 로딩 상태 초기화 */
+    useEffect(() => {
+        setIsImgLoaded(false);
+    }, [type]);
 
     /* 메일 전송 */
     const emailOnClick = () => {
@@ -56,7 +64,13 @@ function About({ type = "main" }) {
                 <S.AboutCardContainer>
                     <S.ProfileTop>
                         <S.ImageWrapper>
-                            <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
+                            {!isImgLoaded && <C.Skeleton />}
+                            <img
+                                key={type}
+                                src={`${BASE_URL}${profile?.img}`}
+                                alt="profile"
+                                onLoad={() => { setIsImgLoaded(true); }}
+                            />
                         </S.ImageWrapper>
                         <S.NameTag>
                             <h2>{profile?.name}</h2>
@@ -124,7 +138,13 @@ function About({ type = "main" }) {
 
                 <S.ProfileSection>
                     <S.ProfileWrapper>
-                        <img src={`${BASE_URL}${profile?.img}`} alt="profile" />
+                        {!isImgLoaded && <C.Skeleton />}
+                        <img
+                            key={type}
+                            src={`${BASE_URL}${profile?.img}`}
+                            alt="profile"
+                            onLoad={() => setIsImgLoaded(true)}
+                        />
                     </S.ProfileWrapper>
 
                     <S.ProfileDetailInfo>

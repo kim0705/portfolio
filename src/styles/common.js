@@ -60,3 +60,29 @@ export const LoadingSpinner = styled.div`
     animation: ${rotate} 0.8s linear infinite;
     display: inline-block;
 `;
+
+export const Skeleton = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #2c2c2c;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+`;

@@ -97,8 +97,10 @@ export const CardImageWrapper = styled.div`
     width: 100%;
     height: 200px;
     overflow: hidden; 
+    position: relative;
 
     img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;

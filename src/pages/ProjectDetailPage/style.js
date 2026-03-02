@@ -190,15 +190,6 @@ export const MediaContainer = styled.div`
     }
 `;
 
-export const Skeleton = styled.div`
-    width: 100%;
-    padding-top: 56.25%; 
-    background: linear-gradient(90deg, #2d3139 25%, #3d4450 50%, #2d3139 75%);
-    background-size: 200% 100%;
-    animation: ${shimmer} 1.5s infinite;
-    border-radius: 8px;
-`;
-
 export const TechStackSection = styled.div`
     display: flex; 
     flex-direction: column;

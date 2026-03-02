@@ -26,9 +26,16 @@ export const ProfileTop = styled.div`
 
 export const ImageWrapper = styled.div`
     flex: 0 0 180px;
+    width: 180px;
     height: 180px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
     
     img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -292,12 +299,14 @@ export const ProfileSection = styled.section`
 export const ProfileWrapper = styled.div`
     width: 200px;
     height: 230px;
+    position: relative;
     flex-shrink: 0;
     border-radius: 30px;
     overflow: hidden;
     border: 2px solid #333333;
 
     img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
