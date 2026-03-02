@@ -1,5 +1,5 @@
+import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
 
 export const DetailPageLayout = styled.main`
     width: 100%;
@@ -157,16 +157,46 @@ export const ProjectImagesSection = styled.div`
     margin: 20px 0;
     padding-bottom: 10px;
 
+    flex-direction: row;
     justify-content: ${(props) =>
         props.children.length === 1 ? 'center' : 'flex-start'};
 
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        overflow-x: hidden; 
+        align-items: center;
+    }
+`;
+
+const shimmer = keyframes`
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+`;
+
+export const MediaContainer = styled.div`
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a1d23; 
+
     img {
-        border-radius: 24px;
-        object-fit: cover;
-        flex-shrink: 0;
         width: 100%;
         height: auto;
+        border-radius: 8px;
+        display: ${props => (props.$isVisible ? 'block' : 'none')};
     }
+`;
+
+export const Skeleton = styled.div`
+    width: 100%;
+    padding-top: 56.25%; 
+    background: linear-gradient(90deg, #2d3139 25%, #3d4450 50%, #2d3139 75%);
+    background-size: 200% 100%;
+    animation: ${shimmer} 1.5s infinite;
+    border-radius: 8px;
 `;
 
 export const TechStackSection = styled.div`
@@ -251,6 +281,77 @@ export const TaskGrid = styled.div`
             }
         }
     }
+`;
+
+export const VideoSection = styled.div`
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;    
+    width: 100%;
+    margin: 20px 0;
+    justify-content: center;
+
+    /* 반응형 */
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        align-items: center;
+    }
+`;
+
+export const VideoItem = styled.div`
+    width: 100%;
+    max-width: 1000px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    video {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        background: #000;
+    }
+
+    div {
+        padding: 20px;
+        color: #cccccc;
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.6;
+        background: rgba(255, 255, 255, 0.03);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        word-break: keep-all;
+
+        svg{
+            color: #3b82f6;
+            flex-shrink: 0;
+            margin-top: 4px;
+            margin-right: 6px;
+        }
+    }
+`;
+
+export const SectionSubtitle = styled.h3`
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e2e2e2;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 5px;
+`;
+
+export const SpinnerWrapper = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const RoleDetailSection = styled.section`

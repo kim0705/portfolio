@@ -3,7 +3,18 @@
         "projectId": 1,
         "img": "images/projects/cuissonLogo.png",
         "images": [
-            "images/projects/cuissonImg.PNG"
+            "images/projects/cuissonImg.PNG",
+            "images/projects/cuissonDetailImg.PNG"
+        ],
+        "videos": [
+            "images/projects/cuissonPaymentVideo.mp4"
+        ],
+        "videoNotes": [
+            {
+                "videoId": 0,
+                "title": "장바구니 → 결제 프로세스 전환",
+                "description": "본 영상은 개발 당시 기록된 시연 화면입니다. 0:02 구간의 Layout Shift(레이아웃 흔들림) 현상을 통해 초기 렌더링 최적화의 중요성을 학습하였으며, 이를 계기로 이후 프로젝트에서는 Skeleton UI 적용 및 컨테이너 높이 고정을 통해 안정적인 UX를 제공하는 것을 원칙으로 삼고 있습니다."
+            }
         ],
         "category": "Full-stack Web Development (Team Project)",
         "title": "Cuisson: 밀키트 커머스 플랫폼",
@@ -55,7 +66,7 @@
             ],
             "result": "인증 예외 처리 안정화와 비동기 실행 순서 제어를 통해 결제 프로세스의 신뢰도를 확보했습니다. 특히 다중 재고 업데이트 구조를 최적화하여 DB 처리 효율을 개선했습니다."
         },
-        "retrospect": "보안 인증부터 결제 시스템까지 서비스의 핵심 비즈니스 로직을 직접 설계하고 구현하며 개발자로서 가져야 할 역량을 기를 수 있었습니다. 특히 Spring Security와 JWT 필터를 설계하며 인증 흐름의 과정을 이해하게 되었고 PortOne API를 연동하는 과정에서 외부 인터페이스와 데이터 타입 정합성을 맞추는 정교한 개발 방식의 중요성을 체감했습니다.\n\n프로젝트 초기 설계와 실제 구현 사이의 간극을 줄이기 위해 팀원들과 끊임없이 소통하며 API 명세와 DB 구조를 최적화했고 이 과정에서 효율적인 협업 체계가 프로젝트의 완성도에 미치는 영향을 배울 수 있었습니다. 수많은 문제 해결 과정을 반복하며 얻은 이 경험들은 단순한 기능 구현을 넘어 예외 상황까지 고려한 코드와 안정적인 시스템 설계에 대해 깊이 고민해 보는 소중한 시간이 되었습니다.",
+        "retrospect": "보안 인증부터 결제 시스템까지 서비스의 핵심 비즈니스 로직을 직접 설계하고 구현하며 개발자로서 가져야 할 역량을 기를 수 있었습니다. 특히 Spring Security와 JWT 필터를 설계하며 인증 흐름의 과정을 이해하게 되었고 PortOne API를 연동하는 과정에서 외부 인터페이스와 데이터 타입 정합성을 맞추는 정교한 개발 방식의 중요성을 체감했습니다.\n\n프로젝트 초기 설계와 실제 구현 사이의 간극을 줄이기 위해 팀원들과 끊임없이 소통하며 API 명세와 DB 구조를 최적화했고, 이 과정에서 효율적인 협업 체계가 프로젝트의 완성도에 미치는 영향을 배울 수 있었습니다. 수많은 문제 해결 과정을 반복하며 얻은 이 경험들은 단순한 기능 구현을 넘어 예외 상황까지 고려한 코드와 안정적인 시스템 설계에 대해 깊이 고민해 보는 소중한 시간이 되었습니다.",
         "techStack": [
             {
                 "category": "Backend",
@@ -93,7 +104,9 @@
     {
         "projectId": 2,
         "img": "images/projects/lmsImg.png",
-        "images": [],
+        "images": [
+            "images/projects/lmsLectureImg.png"
+        ],
         "category": "System Upgrade & Segregation (Team Project)",
         "title": "부산디지털대학교 학습관리시스템(LMS) 고도화 사업",
         "period": "2025.02 ~ 2025.11 (전체 기간: ~ 2026.02)",

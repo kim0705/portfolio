@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
+import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiChevronsRight } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiChevronsRight, FiVideo, FiInfo } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -11,10 +12,19 @@ function ProjectDetailPage() {
 
     const { projectId } = useParams();
     const navigate = useNavigate();
+    const [loadedMedia, setLoadedMedia] = useState({});
 
     /* 최신순 정렬 (ID 기반 내림차순) */
     const sortedProjects = [...projectsData].sort((a, b) => b.projectId - a.projectId);
     const project = projectId ? projectsData.find(p => p.projectId === parseInt(projectId)) : sortedProjects[0];
+
+    /* 미디어 로드 완료 시 호출될 함수 */
+    const handleMediaLoad = (idx, isLoaded) => {
+        setLoadedMedia((prev) => ({
+            ...prev,
+            [idx]: isLoaded,
+        }));
+    };
 
     return (
         <S.DetailPageLayout>
@@ -49,9 +59,22 @@ function ProjectDetailPage() {
 
                 {project?.images?.length > 0 && (
                     <S.ProjectImagesSection>
-                        {project?.images?.map((img, idx) => (
-                            <img key={idx} src={`${BASE_URL}${img}`} alt={project?.title} />
-                        ))}
+                        {project?.images?.map((src, idx) => {
+                            const mediaSrc = `${BASE_URL}${src}`;
+                            const isVisible = loadedMedia[idx];
+
+                            return (
+                                <S.MediaContainer key={idx} $isVisible={isVisible}>
+                                    {/* 로딩 중 스켈레톤 표시 */}
+                                    {!isVisible && <S.Skeleton />}
+                                    <img
+                                        src={mediaSrc}
+                                        alt={project?.title}
+                                        onLoad={() => handleMediaLoad(idx, true)}
+                                    />
+                                </S.MediaContainer>
+                            )
+                        })}
                     </S.ProjectImagesSection>
                 )}
 
@@ -74,6 +97,53 @@ function ProjectDetailPage() {
                         <div key={i}>{task}</div>
                     ))}
                 </S.TaskGrid>
+
+                {project?.videos?.length > 0 && (
+                    <>
+                        <S.SectionTitle><FiVideo /> 기능 시연 데모</S.SectionTitle>
+                        <S.VideoSection>
+                            {project.videos.map((video, idx) => {
+                                const videoKey = `video-${idx}`;
+                                const isVideoVisible = loadedMedia[videoKey];
+                                const videoNote = project?.videoNotes?.find(note => note.videoId === idx);
+
+                                return (
+                                    <S.VideoItem key={idx}>
+                                        {videoNote?.title && (
+                                            <S.SectionSubtitle>{videoNote.title}</S.SectionSubtitle>
+                                        )}
+
+                                        {!isVideoVisible && (
+                                            <S.SpinnerWrapper>
+                                                <C.LoadingSpinner size="40px" thickness="4px" />
+                                            </S.SpinnerWrapper>
+                                        )}
+
+                                        <video
+                                            src={`${BASE_URL}${video}`}
+                                            controls
+                                            playsInline
+                                            autoPlay
+                                            muted
+                                            loop
+                                            onWaiting={() => handleMediaLoad(videoKey, false)}
+                                            onCanPlay={() => handleMediaLoad(videoKey, true)}
+                                        />
+
+                                        {videoNote?.description && (
+                                            <div>
+                                                <FiInfo />
+                                                <span>
+                                                    <strong>Technical Note:</strong> {videoNote?.description}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </S.VideoItem>
+                                );
+                            })}
+                        </S.VideoSection>
+                    </>
+                )}
 
                 <S.SectionTitle><FiUsers /> 담당 역할 및 수행 내역</S.SectionTitle>
                 <S.RoleDetailSection>
