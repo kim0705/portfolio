@@ -260,6 +260,7 @@ export const TaskGrid = styled.div`
         border-radius: 24px;
         border: 1px solid #2d3139;
         font-size: 16px;
+        font-weight: 500;
         line-height: 1.6;
         color: #e2e8f0;
         transition: transform 0.25s ease, border-color 0.25s ease;
@@ -324,7 +325,7 @@ export const VideoItem = styled.div`
 `;
 
 export const SectionSubtitle = styled.h3`
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 600;
     color: #e2e2e2;
     margin-bottom: 20px;
@@ -374,6 +375,7 @@ export const RoleGroup = styled.div`
             position: relative;
             margin-bottom: 14px;
             font-size: 16px;
+            font-weight: 500;
             line-height: 1.7;
             padding-left: 24px;
             color: #d1d5db;
@@ -505,7 +507,8 @@ export const ProblemSection = styled.section`
             position: relative;
             display: flex;
             align-items: flex-start;
-            font-size: 15.5px;
+            font-size: 16px;
+            font-weight: 500;
             line-height: 1.6;
             color: #d1d5db;
             padding-left: 20px;
@@ -560,13 +563,13 @@ export const ImprovementSection = styled.section`
 export const ImprovementGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+    gap: 24px;
 `;
 
 export const ImprovementItem = styled.div`
     background: rgba(255, 255, 255, 0.03);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 24px;
     border: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
@@ -574,10 +577,10 @@ export const ItemHeader = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 0.8rem;
+    margin-bottom: 13px;
 
     h5 {
-        font-size: 1rem;
+        font-size: 16px;
         color: #ffffff;
         margin: 0;
     }
@@ -595,10 +598,10 @@ export const Badge = styled.span`
 `;
 
 export const ActionDesc = styled.p`
-    font-size: 0.85rem;
+    font-size: 14px;
     color: #E6E6E6;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 24px;
 `;
 
 export const ComparisonBox = styled.div`
@@ -612,7 +615,7 @@ export const ComparisonBox = styled.div`
     svg { 
         flex-shrink: 0;
         color: #4ade80; 
-        font-size: 1.2rem;
+        font-size: 19px;
     }
 `;
 
@@ -621,14 +624,14 @@ export const AsisSide = styled.div`
 
     label {
         display: block;
-        font-size: 0.7rem;
+        font-size: 12px;
         font-weight: 800;
         color: #e0e0e0;
         margin-bottom: 6px;
     }
 
     p {
-        font-size: 0.8rem;
+        font-size: 13px;
         color: #ADADAD;
         line-height: 1.4;
         word-break: keep-all;
@@ -640,6 +643,7 @@ export const TobeSide = styled(AsisSide)`
         color: #4ade80; 
     }
     p { 
+        font-size: 13px;
         color: #fff; 
         font-weight: 600; 
     }
@@ -658,8 +662,9 @@ export const RetrospectCard = styled.div`
         position: relative;
         margin: 0;
         z-index: 1;
-        font-size: 16px;
-        line-height: 1.9;
+        font-size: 15.5px;
+        font-weight: 500;
+        line-height: 1.7;
         color: #e2e8f0;
         font-style: italic;
         white-space: pre-wrap;
