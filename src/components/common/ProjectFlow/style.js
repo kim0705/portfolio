@@ -73,7 +73,7 @@ export const FlowCanvas = styled.div`
 export const DescriptionBox = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
     align-self: flex-start;
 
     /* 반응형 */
@@ -87,26 +87,31 @@ export const DescriptionBox = styled.div`
     }
 
     p {
-        margin: 0;
+        counter-increment: step-counter;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         font-size: 16px;
         color: #d1d5db;
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
         line-height: 1.6;
-        word-break: keep-all;
+
+        &::before {
+            content: "STEP " counter(step-counter);
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #3b82f6; 
+            background: rgba(59, 130, 246, 0.15);
+            padding: 4px 10px;
+            border-radius: 6px;
+            width: fit-content;
+        }
 
         /* 반응형 */
         @media (max-width: 1024px) {
             font-size: 15px;
         }
-    }
-
-    svg {
-        color: #007bff;
-        margin-top: 5px;
-        flex-shrink: 0;
-        font-size: 16px;
     }
 
     p:first-of-type {

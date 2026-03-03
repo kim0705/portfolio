@@ -265,6 +265,20 @@ export const TitleSection = styled.section`
         letter-spacing: -1.5px;
         color: #ffffff;
     }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+
+        h1 {
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    }
+
     p {
         font-size: 22px;
         line-height: 1.6;
@@ -294,6 +308,14 @@ export const ProfileSection = styled.section`
     opacity: 0;
     animation: ${scaleAppear} 0.5s ease-out forwards;
     animation-delay: 0.1s;
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 25px 20px;
+        gap: 0;
+    }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -310,6 +332,11 @@ export const ProfileWrapper = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        display: none;
     }
 `;
 
@@ -352,6 +379,37 @@ export const ProfileDetailInfo = styled.div`
             font-size: 22px;
         }
     }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        width: 100%;
+
+        h2 {
+            margin-bottom: 15px;
+            justify-content: flex-start;
+            font-size: 22px;
+
+            svg {
+                font-size: 24px;
+            }
+        }
+
+        ul {
+            padding-top: 15px;
+        }
+
+        li {
+            padding-left: 20px;
+            text-align: left;
+            font-size: 16px;
+            
+            &::before {
+                display: block;
+                left: 0;
+                top: -10px;
+            }
+        }
+    }
 `;
 
 export const GridSection = styled.section`
@@ -362,6 +420,12 @@ export const GridSection = styled.section`
     opacity: 0;
     animation: ${detailPageFadeIn} 0.5s ease-out forwards;
     animation-delay: 0.25s;
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 `;
 
 export const GridItem = styled.article`

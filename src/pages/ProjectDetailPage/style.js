@@ -524,74 +524,124 @@ export const ProblemSection = styled.section`
     }
 `;
 
-export const SolutionSection = styled.section`
+export const Divider = styled.div`
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 10px 0 30px 0;
+    width: 100%;
+`;
+
+export const ImprovementSection = styled.section`
+    display: flex;
+    flex-direction: column;
+
     h4 {
         color: #ffffff;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         font-size: 20px;
         font-weight: 700;
         display: flex;
         align-items: center;
-        gap: 12px;
-
+        
         &::before {
-            content: "SOLUTION";
+            content: "IMPROVE";
             font-size: 11px;
             font-weight: 800;
-            color: #51cf66;
-            background: rgba(81, 207, 102, 0.15);
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
             padding: 4px 10px;
             border-radius: 6px;
+            margin-right: 10px;
             letter-spacing: 1px;
         }
     }
+`;
 
-    /* 해결방안 */
-    ul {
-        list-style: none;
-        padding: 0;
+export const ImprovementGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+`;
 
-        li {
-            font-size: 16px;
-            color: #d1d5db;
-            margin-bottom: 14px;
-            line-height: 1.7;
-            padding-left: 28px;
-            position: relative;
+export const ImprovementItem = styled.div`
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+`;
 
-            &::before {
-                content: "✓";
-                position: absolute;
-                left: 0;
-                font-size: 18px;
-                font-weight: 900;
-                color: #007bff;
-            }
-        }
+export const ItemHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+
+    h5 {
+        font-size: 1rem;
+        color: #ffffff;
+        margin: 0;
+    }
+`;
+
+export const Badge = styled.span`
+    background: rgba(255, 255, 255, 0.1);
+    color: #4ade80; 
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+`;
+
+export const ActionDesc = styled.p`
+    font-size: 0.85rem;
+    color: #E6E6E6;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+`;
+
+export const ComparisonBox = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+
+    svg { 
+        flex-shrink: 0;
+        color: #4ade80; 
+        font-size: 1.2rem;
+    }
+`;
+
+export const AsisSide = styled.div`
+    flex: 1;
+
+    label {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: #e0e0e0;
+        margin-bottom: 6px;
     }
 
-    /* 결과 */
     p {
-        position: relative;
-        display: block;
-        padding-left: 30px;
-        margin-top: 20px;
-        padding: 12px 16px 12px 28px;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.7;
-        color: #d1d5db;
+        font-size: 0.8rem;
+        color: #ADADAD;
+        line-height: 1.4;
+        word-break: keep-all;
+    }
+`;
 
-        svg {
-            position: absolute;
-            left: -8px;
-            top: 15px;
-            flex-shrink: 0;
-            margin-right: 10px;
-            margin-top: 5px;
-            color: #007bff;
-            font-size: 30px;
-        }
+export const TobeSide = styled(AsisSide)`
+    label { 
+        color: #4ade80; 
+    }
+    p { 
+        color: #fff; 
+        font-weight: 600; 
     }
 `;
 

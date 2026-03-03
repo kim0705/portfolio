@@ -206,6 +206,7 @@ export const TitleSection = styled.section`
         letter-spacing: -1.5px;
         color: #ffffff;
     }
+
     p {
         font-size: 22px;
         line-height: 1.6;
@@ -213,6 +214,17 @@ export const TitleSection = styled.section`
         color: #aaaaaa;
         margin: 0 auto;
         font-weight: 400;
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        margin-bottom: 40px;
+        h1 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 20px;
+        }
     }
 `;
 
@@ -227,5 +239,12 @@ export const ProjectGrid = styled.div`
         height: auto;
         grid-template-columns: repeat(2, 1fr);
         gap: 24px; 
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        margin: 0 auto;
     }
 `;  

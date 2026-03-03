@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiChevronsRight, FiVideo, FiInfo } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -184,19 +184,41 @@ function ProjectDetailPage() {
                         <h4>[문제 정의 및 원인 분석]</h4>
                         <p>{project?.troubleshooting?.problem}</p>
                         <ul>
-                            {project?.troubleshooting?.cause?.map((c, i) => (
+                            {project?.troubleshooting?.causes?.map((c, i) => (
                                 <li key={i}>{c}</li>
                             ))}
                         </ul>
                     </S.ProblemSection>
 
-                    <S.SolutionSection>
-                        <h4>[해결 방안]</h4>
-                        <ul>
-                            {project?.troubleshooting?.solution?.map((s, i) => <li key={i}>{s}</li>)}
-                        </ul>
-                        <p><FiChevronsRight />{project?.troubleshooting?.result}</p>
-                    </S.SolutionSection>
+                    <S.Divider />
+
+                    <S.ImprovementSection>
+                        <h4>[해결 및 개선 성과]</h4>
+                        <S.ImprovementGrid>
+                            {project?.troubleshooting?.improvements?.map((item, i) => (
+                                <S.ImprovementItem key={i}>
+                                    <S.ItemHeader>
+                                        <S.Badge>Task {i + 1}</S.Badge>
+                                        <h5>{item?.title}</h5>
+                                    </S.ItemHeader>
+                                    <S.ActionDesc>{item?.action}</S.ActionDesc>
+
+                                    <S.ComparisonBox>
+                                        <S.AsisSide>
+                                            <label>AS-IS</label>
+                                            <p>{item?.asis}</p>
+                                        </S.AsisSide>
+
+                                        <FiArrowRight />
+                                        <S.TobeSide>
+                                            <label>TO-BE</label>
+                                            <p>{item?.tobe}</p>
+                                        </S.TobeSide>
+                                    </S.ComparisonBox>
+                                </S.ImprovementItem>
+                            ))}
+                        </S.ImprovementGrid>
+                    </S.ImprovementSection>
                 </S.TroubleShootingCard>
 
                 <S.SectionTitle><FiSearch /> 회고</S.SectionTitle>

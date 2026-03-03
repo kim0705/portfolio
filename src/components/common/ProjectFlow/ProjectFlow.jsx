@@ -3,7 +3,7 @@ import ReactFlow, { Background, ControlButton, Controls, MarkerType, ReactFlowPr
 import 'reactflow/dist/style.css';
 import * as S from './style';
 import { flowData } from '../../../utils/flowData';
-import { FiInfo, FiMinimize, FiRotateCcw, FiSearch } from 'react-icons/fi';
+import { FiMinimize, FiRotateCcw, FiSearch } from 'react-icons/fi';
 
 /* ProjectFlow 컴포넌트: projectId를 받아 해당 프로젝트의 로직 시각화 다이어그램을 렌더링 */
 function ProjectFlow({ projectId }) {
@@ -91,7 +91,7 @@ function ProjectFlow({ projectId }) {
                 {currentFlow?.description && (
                     <S.DescriptionBox>
                         {currentFlow?.description.map((desc, i) => (
-                            <p key={i}><FiInfo /> {desc}</p>
+                            <p key={i}>{desc}</p>
                         ))}
                     </S.DescriptionBox>
                 )}
