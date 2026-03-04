@@ -150,6 +150,30 @@ export const ProjectOverview = styled.div`
     }
 `;
 
+export const FullPageLoader = styled.div`
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 11, 14, 0.7);
+    backdrop-filter: blur(8px); 
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    span {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+`;
+
 export const ProjectImagesSection = styled.div`
     display: flex;
     gap: 16px;
@@ -168,25 +192,19 @@ export const ProjectImagesSection = styled.div`
     }
 `;
 
-const shimmer = keyframes`
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-`;
-
 export const MediaContainer = styled.div`
     position: relative;
     width: 100%;
-    min-height: 200px;
-    margin-bottom: 20px;
+    min-height: 250px;
     border-radius: 12px;
     overflow: hidden;
-    background: #1a1d23; 
+    background: #1a1d23;
 
     img {
         width: 100%;
         height: auto;
-        border-radius: 8px;
-        display: ${props => (props.$isVisible ? 'block' : 'none')};
+        display: block;
+        transition: opacity 0.4s ease-in-out;
     }
 `;
 
@@ -292,58 +310,65 @@ export const VideoSection = styled.div`
 
 export const VideoItem = styled.div`
     width: 100%;
-    max-width: 1000px;    
+    max-width: 1000px;     
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
+
+    &:last-child {
+        margin-bottom: 0; 
+    }
+`;
+
+export const VideoContainer = styled.div`
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    background: #1a1d23;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
     video {
         width: 100%;
-        height: auto;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        height: 100%;
+        object-fit: cover;
+        display: block;
         background: #000;
+        transition: opacity 0.4s ease-in-out;
+    }
+`;
+
+export const VideoNoteBox = styled.div`
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid #3b82f6;
+    border-radius: 4px 12px 12px 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    svg {
+        color: #3b82f6;
+        font-size: 18px;
+        margin-top: 2px;
+        flex-shrink: 0;
     }
 
-    div {
-        padding: 20px;
-        color: #cccccc;
-        font-size: 14px;
-        text-align: center;
+    span {
+        color: #94a3b8;
+        font-size: 14.5px;
         line-height: 1.6;
-        background: rgba(255, 255, 255, 0.03);
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
         word-break: keep-all;
 
-        svg{
-            color: #3b82f6;
-            flex-shrink: 0;
-            margin-top: 4px;
+        strong {
+            color: #e2e8f0;
             margin-right: 6px;
         }
     }
-`;
-
-export const SectionSubtitle = styled.h3`
-    font-size: 18px;
-    font-weight: 600;
-    color: #e2e2e2;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 5px;
-`;
-
-export const SpinnerWrapper = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 export const RoleDetailSection = styled.section`
@@ -394,65 +419,6 @@ export const RoleGroup = styled.div`
     }
 `;
 
-export const RoleSubGrid = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    border-top: 1px solid #2d3139;
-    padding-top: 30px;
-    margin-top: 20px;
-
-    /* 반응형 */
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-    }
-`;
-
-export const RoleBox = styled.div`
-    padding: 10px 0;
-    
-    h4 {
-        color: #007bff;
-        margin-bottom: 15px;
-        font-size: 18px;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-
-        &::before {
-            content: "✔";
-            margin-right: 8px;
-            font-size: 14px;
-        }
-    }
-
-    ul {
-        margin: 0;
-        padding: 0;
-
-        li {
-            font-size: 15.5px;
-            color: #e2e8f0;
-            margin-bottom: 12px;
-            line-height: 1.6;
-            padding-left: 18px;
-            position: relative;
-            opacity: 1;
-
-            &::before {
-                content: "•";
-                color: #3b82f6;
-                position: absolute;
-                left: 0;
-            }
-            
-            &:last-child { 
-                margin-bottom: 0; 
-            }
-        }
-    }
-`;
-
 export const TroubleShootingCard = styled.article`
     background-color: #1a1d23;
     padding: 40px;
@@ -464,6 +430,11 @@ export const TroubleShootingCard = styled.article`
 `;
 
 export const ProblemSection = styled.section`
+    background: rgba(255, 107, 107, 0.03);
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 107, 107, 0.1);
+
     h4 {
         color: #ffffff;
         margin-bottom: 16px;
@@ -489,10 +460,14 @@ export const ProblemSection = styled.section`
     p {
         font-size: 16px;
         font-weight: 500;
-        line-height: 1.8;
-        color: #d1d5db;
+        line-height: 1.7;
+        color: #f1f5f9;
         margin-bottom: 18px; 
-        padding-left: 4px;
+        border-left: 4px solid #ff6b6b;
+        margin-left: 10px;
+        padding: 18px 22px;
+        background: rgba(255, 107, 107, 0.07);
+        border-radius: 4px 12px 12px 4px;
     }
 
     /* 원인 분석 */
@@ -598,7 +573,7 @@ export const Badge = styled.span`
 `;
 
 export const ActionDesc = styled.p`
-    font-size: 14px;
+    font-size: 15px;
     color: #E6E6E6;
     line-height: 1.6;
     margin-bottom: 24px;
@@ -631,7 +606,7 @@ export const AsisSide = styled.div`
     }
 
     p {
-        font-size: 13px;
+        font-size: 14px;
         color: #ADADAD;
         line-height: 1.4;
         word-break: keep-all;
@@ -642,9 +617,10 @@ export const TobeSide = styled(AsisSide)`
     label { 
         color: #4ade80; 
     }
+
     p { 
-        font-size: 13px;
-        color: #fff; 
+        font-size: 14px;
+        color: #ffffff; 
         font-weight: 600; 
     }
 `;

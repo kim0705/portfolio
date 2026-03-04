@@ -1,50 +1,72 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactFlow, { Background, ControlButton, Controls, MarkerType, ReactFlowProvider, useEdgesState, useNodesState, useReactFlow } from 'reactflow';
 import 'reactflow/dist/style.css';
 import * as S from './style';
 import { flowData } from '../../../utils/flowData';
 import { FiMinimize, FiRotateCcw, FiSearch } from 'react-icons/fi';
 
+/* 렌더링 시마다 객체가 새로 생성되는 것을 방지하기 위해 상수로 추출 */
+const NODE_TYPES = {};
+const EDGE_TYPES = {};
+const FIT_VIEW_OPTIONS = { padding: 0.2 };
+const DEFAULT_EDGE_OPTIONS = {
+    type: 'smoothstep',
+    animated: true,
+    markerEnd: {
+        type: MarkerType.ArrowClosed,
+        width: 12,
+        height: 12,
+        color: '#007bff'
+    },
+    style: { stroke: '#636e7b', strokeWidth: 2.5 },
+};
+
 /* ProjectFlow 컴포넌트: projectId를 받아 해당 프로젝트의 로직 시각화 다이어그램을 렌더링 */
 function ProjectFlow({ projectId }) {
 
     const { fitView } = useReactFlow();
     const [isExpanded, setIsExpanded] = useState(false);
+
+    /* projectId가 바뀔 때만 데이터를 가져오도록 메모이제이션 */
     const currentFlow = useMemo(() => flowData?.[projectId], [projectId]);
-    const [nodes, setNodes, onNodesChange] = useNodesState(currentFlow?.nodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(currentFlow?.edges);
+
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
+    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+
+    const handleFitView = useCallback(() => {
+        requestAnimationFrame(() => {
+            fitView({ 
+                duration: 600, 
+                padding: 0.3,
+                includeHiddenNodes: true 
+            });
+        });
+    }, [fitView]);
+
+    useEffect(() => {
+        if (currentFlow) {
+            setNodes(currentFlow.nodes || []);
+            setEdges(currentFlow.edges || []);
+            
+            handleFitView();
+        }
+    }, [currentFlow, setNodes, setEdges, fitView]);
 
     /* 위치 원상복귀 함수 */
     const handleResetButton = useCallback(() => {
         if (!currentFlow) return;
 
-        /* 1. 노드 위치 초기화 (참조 관계를 끊기 위해 새 객체 생성) */
-        setNodes(currentFlow.nodes.map(node => ({
-            ...node,
-            position: { ...node.position }
-        })));
+        setNodes(currentFlow.nodes.map(node => ({ ...node })));
+        handleFitView();
 
-        /* 2. 화면 중앙 정렬 및 줌 조절 */
-        setTimeout(() => {
-            fitView({ duration: 800, padding: 0.2 });
-        }, 50);
     }, [currentFlow, setNodes, fitView]);
 
-    /* 차트 초기화 시 fitView 실행 */
-    const onInit = useCallback((instance) => {
-        setTimeout(() => {
-            instance.fitView({ padding: 0.1, duration: 400 });
-        }, 100);
-    }, []);
-
     /* 차트를 전체화면으로 확대 */
-    const handleExpandButton = () => {
-        setIsExpanded(!isExpanded);
-
-        setTimeout(() => {
-            fitView({ duration: 400, padding: 0.2 });
-        }, 50);
-    };
+    const handleExpandButton = useCallback(() => {
+        setIsExpanded(prev => !prev);
+        setTimeout(handleFitView, 200);
+    }, [fitView]);
 
     return (
         <S.FlowContainer>
@@ -55,22 +77,18 @@ function ProjectFlow({ projectId }) {
 
                 <S.FlowCanvas $isExpanded={isExpanded}>
                     <ReactFlow
-                        key={projectId}
                         nodes={nodes}
                         edges={edges}
-                        onInit={onInit}
+                        fitView
+                        fitViewOptions={FIT_VIEW_OPTIONS}
+                        defaultEdgeOptions={DEFAULT_EDGE_OPTIONS}
                         onNodesChange={onNodesChange}
                         onEdgesChange={onEdgesChange}
-                        fitView
+                        nodeTypes={NODE_TYPES}
+                        edgeTypes={EDGE_TYPES}
                         minZoom={0.1}
-                        fitViewOptions={{ padding: 0.2 }}
                         nodesConnectable={false}
-                        defaultEdgeOptions={{
-                            type: 'smoothstep',
-                            animated: true,
-                            markerEnd: { type: MarkerType.ArrowClosed, width: 12, height: 12, color: '#007bff' },
-                            style: { stroke: '#636e7b', strokeWidth: 2.5 },
-                        }}
+                        panOnScroll={false}
                     >
                         {/* 배경의 점 패턴 설정 */}
                         <Background color="#2d3139" gap={20} />
