@@ -52,7 +52,7 @@ export const FlowCanvas = styled.div`
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 1000;
+        z-index: 2000;
         border-radius: 0;
         background: #111318;
         transform: none;
@@ -66,6 +66,12 @@ export const FlowCanvas = styled.div`
             height: 85vh;
             border-radius: 16px;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            width: 100vw !important;
+            height: 100dvh !important;
         }
     `}
 `;

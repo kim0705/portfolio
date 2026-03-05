@@ -20,7 +20,7 @@ export const flowData = {
         title: "결제 트랜잭션 및 재고 관리 프로세스",
         description: [
             "Atomic Transaction: 주문 생성, 재고 차감, 결제 데이터 저장을 하나의 트랜잭션으로 처리하여 데이터 무결성 보장",
-            "실시간 재고 연동: 결제 승인 시 재고 즉시 차감 및 주문 취소(배송 전) 시 자동 환불 API 호출과 재고 복구 프로세스 구축"
+            "실시간 재고 연동: 결제 승인 시 재고 즉시 차감 및 주문 취소 시 자동 환불 API 호출과 재고 복구 프로세스 구축"
         ],
         nodes: [
             /* --- 결제 흐름 (좌측) --- */
@@ -50,15 +50,13 @@ export const flowData = {
             {
                 id: 'r2',
                 position: { x: 600, y: 150 },
-                data: { label: '주문 상태 체크' },
+                data: { label: '결제 상태 검증' },
                 style: { ...commonNodeStyle, borderRadius: '40px', border: '2px solid #007bff' }
-
             },
             /* 환불 프로세스 진행 */
-            { id: 'r3', position: { x: 850, y: 350 }, data: { label: '배송 중/완료: 고객센터 문의 안내' }, style: commonNodeStyle },
-            { id: 'r4', position: { x: 550, y: 450 }, data: { label: 'PortOne 환불 API 호출' }, style: commonNodeStyle },
-            { id: 'r5', position: { x: 550, y: 600 }, data: { label: '재고 복구 및 주문 상태 업데이트' }, style: commonNodeStyle },
-            { id: 'r6', position: { x: 550, y: 750 }, data: { label: '환불/취소 완료 메시지' }, style: { ...commonNodeStyle, background: '#1e3a5f', border: '1px solid #007bff' } },
+            { id: 'r4', position: { x: 600, y: 350 }, data: { label: 'PortOne 환불 API 호출' }, style: commonNodeStyle },
+            { id: 'r5', position: { x: 600, y: 500 }, data: { label: '재고 복구 및 주문 상태 업데이트' }, style: commonNodeStyle },
+            { id: 'r6', position: { x: 600, y: 650 }, data: { label: '환불/취소 완료 메시지' }, style: { ...commonNodeStyle, background: '#1e3a5f', border: '1px solid #007bff' } },
         ],
         edges: [
             /* 결제 엣지 */
@@ -71,8 +69,7 @@ export const flowData = {
 
             /* 환불 엣지 */
             { id: 'er1-2', source: 'r1', target: 'r2' },
-            { id: 'er2-3', source: 'r2', target: 'r3', label: '배송 중/완료' },
-            { id: 'er2-4', source: 'r2', target: 'r4', label: '배송 전' },
+            { id: 'er2-4', source: 'r2', target: 'r4', label: '취소 가능' },
             { id: 'er4-5', source: 'r4', target: 'r5', label: '성공', animated: true },
             { id: 'er5-6', source: 'r5', target: 'r6' },
         ]

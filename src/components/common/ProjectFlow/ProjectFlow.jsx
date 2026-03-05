@@ -36,10 +36,10 @@ function ProjectFlow({ projectId }) {
 
     const handleFitView = useCallback(() => {
         requestAnimationFrame(() => {
-            fitView({ 
-                duration: 600, 
+            fitView({
+                duration: 600,
                 padding: 0.3,
-                includeHiddenNodes: true 
+                includeHiddenNodes: true
             });
         });
     }, [fitView]);
@@ -48,7 +48,7 @@ function ProjectFlow({ projectId }) {
         if (currentFlow) {
             setNodes(currentFlow.nodes || []);
             setEdges(currentFlow.edges || []);
-            
+
             handleFitView();
         }
     }, [currentFlow, setNodes, setEdges, fitView]);
@@ -65,7 +65,9 @@ function ProjectFlow({ projectId }) {
     /* 차트를 전체화면으로 확대 */
     const handleExpandButton = useCallback(() => {
         setIsExpanded(prev => !prev);
-        setTimeout(handleFitView, 200);
+        setTimeout(() => {
+            handleFitView();
+        }, 300);
     }, [fitView]);
 
     return (
