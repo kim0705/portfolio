@@ -2,7 +2,7 @@
 
 ## 📷 Portfolio Preview
 
-![portfolio-preview](image.png)
+![Portfolio Preview](assets/portfolioPreview.png)
 
 🔗 **Live Site**  
 https://portfolio-cyan-one-81.vercel.app/
