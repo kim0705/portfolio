@@ -19,7 +19,7 @@ export const flowData = {
     1: {
         title: "결제 트랜잭션 및 재고 관리 프로세스",
         description: [
-            "Atomic Transaction: 주문 생성, 재고 차감, 결제 데이터 저장을 하나의 트랜잭션으로 처리하여 데이터 무결성 보장",
+            "Atomic Transaction: 주문·결제·재고·판매량 데이터 저장을 하나의 트랜잭션으로 처리하여 데이터 무결성 보장",
             "실시간 재고 연동: 결제 승인 시 재고 즉시 차감 및 주문 취소 시 자동 환불 API 호출과 재고 복구 프로세스 구축"
         ],
         nodes: [
