@@ -60,7 +60,8 @@
             "JSP",
             "Spring Boot",
             "Spring Framework",
-            "MyBatis"
+            "MyBatis",
+            "Spring Security"
         ],
         "frontend": [
             "JavaScript",

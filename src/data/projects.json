@@ -87,7 +87,9 @@
                     "Spring Boot",
                     "Java",
                     "MyBatis",
-                    "JWT / OAuth2"
+                    "Spring Security",
+                    "JWT",
+                    "OAuth2"
                 ]
             },
             {
