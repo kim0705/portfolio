@@ -35,7 +35,7 @@
                 "details": [
                     "Spring Security 기반 JWT 인증 구조 설계 및 필터 구현",
                     "PrincipalUser 기반 Role 권한 세분화",
-                    "주문·결제·주소 데이터 생성 및 트랜잭션 처리",
+                    "주문·결제 데이터 생성 및 트랜잭션 처리",
                     "@Transactional 기반 데이터 정합성 관리",
                     "MyBatis 동적 SQL과 CASE-WHEN을 활용한 다중 재고·판매량 일괄 업데이트 최적화"
                 ]
