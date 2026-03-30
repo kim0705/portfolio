@@ -163,14 +163,14 @@ function ProjectDetailPage() {
 
                 {project?.projectId === 2 ? (
                     <>
-                        <S.SectionTitle><FiSettings /> 공통 코드 및 운영 체계</S.SectionTitle>
+                        <S.SectionTitle><FiSettings /> 공통 코드</S.SectionTitle>
                         <CommonCode />
                     </>
                 ) : <></>}
 
                 {flowData[project?.projectId] && (
                     <>
-                        <S.SectionTitle><FiZap /> 핵심 로직 설계</S.SectionTitle>
+                        <S.SectionTitle><FiZap /> 핵심 로직</S.SectionTitle>
                         <ProjectFlow projectId={project?.projectId} />
                     </>
                 )}

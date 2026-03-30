@@ -36,7 +36,7 @@ function CommonCode() {
                 <S.PanelCaption>
                     <strong>계층형 구조를 통한 시스템 재사용성 확보</strong>
                     <p>
-                        그룹(L1)과 상세 항목(L2)을 구조화하여 공통 코드 등록만으로 추가 개발 없이 다양한 화면과 로직에서 즉시 활용 가능하도록 설계했습니다.
+                        그룹(L1)과 상세 항목(L2)을 구조화하여 공통 코드 등록으로 추가 개발 없이 화면과 로직에서 활용 가능하도록 구현했습니다.
                     </p>
                 </S.PanelCaption>
             </S.DetailPanel>
