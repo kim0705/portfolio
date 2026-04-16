@@ -419,210 +419,170 @@ export const RoleGroup = styled.div`
     }
 `;
 
-export const TroubleShootingCard = styled.article`
-    background-color: #1a1d23;
-    padding: 40px;
-    border-radius: 24px;
+export const FlowContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 80px;
+`;
+
+export const FlowCard = styled.div`
+    background: #1a1d23;
     border: 1px solid #2d3139;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    border-left: 4px solid ${props => 
+        props.type === 'problem' ? '#ff6b6b' : 
+        props.type === 'solution' ? '#007bff' : '#4ade80'
+    };
 `;
 
-export const ProblemSection = styled.section`
-    background: rgba(255, 107, 107, 0.03);
-    padding: 24px;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 107, 107, 0.1);
+export const FlowHeader = styled.div`
+    margin-bottom: 20px;
 
-    h4 {
-        color: #ffffff;
-        margin-bottom: 16px;
-        font-size: 20px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        
-        &::before {
-            content: "PROBLEM";
-            font-size: 11px;
-            font-weight: 800;
-            color: #ff6b6b;
-            background: rgba(255, 107, 107, 0.15);
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-right: 10px;
-            letter-spacing: 1px;
-        }
-    }
-
-    /* 문제 정의 */
-    p {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.7;
-        color: #f1f5f9;
-        margin-bottom: 18px; 
-        border-left: 4px solid #ff6b6b;
-        margin-left: 10px;
-        padding: 18px 22px;
-        background: rgba(255, 107, 107, 0.07);
-        border-radius: 4px 12px 12px 4px;
-    }
-
-    /* 원인 분석 */
-    ul {
-        list-style: none;
-        padding-left: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-
-        li {
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 1.6;
-            color: #d1d5db;
-            padding-left: 20px;
-            margin-bottom: 10px;
-
-            &::before {
-                content: "•";
-                position: absolute;
-                left: 0;
-                top: -4px;
-                color: #ff6b6b;
-                font-size: 18px;
-                font-weight: bold;
-            }
-        }
-    }
-`;
-
-export const Divider = styled.div`
-    height: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    margin: 10px 0 30px 0;
-    width: 100%;
-`;
-
-export const ImprovementSection = styled.section`
-    display: flex;
-    flex-direction: column;
-
-    h4 {
-        color: #ffffff;
-        margin-bottom: 16px;
-        font-size: 20px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        
-        &::before {
-            content: "IMPROVE";
-            font-size: 11px;
-            font-weight: 800;
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.1);
-            padding: 4px 10px;
-            border-radius: 6px;
-            margin-right: 10px;
-            letter-spacing: 1px;
-        }
-    }
-`;
-
-export const ImprovementGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-`;
-
-export const ImprovementItem = styled.div`
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-`;
-
-export const ItemHeader = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 13px;
-
-    h5 {
-        font-size: 16px;
-        color: #ffffff;
-        margin: 0;
-    }
-`;
-
-export const Badge = styled.span`
-    background: rgba(255, 255, 255, 0.1);
-    color: #4ade80; 
-    border: 1px solid rgba(74, 222, 128, 0.2);
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 800;
-    text-transform: uppercase;
-`;
-
-export const ActionDesc = styled.p`
-    font-size: 15px;
-    color: #E6E6E6;
-    line-height: 1.6;
-    margin-bottom: 24px;
-`;
-
-export const ComparisonBox = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    border-radius: 8px;
-
-    svg { 
-        flex-shrink: 0;
-        color: #4ade80; 
-        font-size: 19px;
-    }
-`;
-
-export const AsisSide = styled.div`
-    flex: 1;
-
-    label {
-        display: block;
-        font-size: 12px;
-        font-weight: 800;
-        color: #e0e0e0;
-        margin-bottom: 6px;
-    }
-
-    p {
-        font-size: 14px;
-        color: #ADADAD;
-        line-height: 1.4;
-        word-break: keep-all;
-    }
-`;
-
-export const TobeSide = styled(AsisSide)`
-    label { 
-        color: #4ade80; 
-    }
-
-    p { 
-        font-size: 14px;
+    h4 { 
+        font-size: 19px; 
         color: #ffffff; 
-        font-weight: 600; 
+        margin-top: 10px; 
+        font-weight: 700; 
     }
+`;
+
+export const FlowBadge = styled.span`
+    font-size: 10px;
+    font-weight: 800;
+    color: ${props => props.color};
+    background: ${props => props.color}15;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    color: ${props => 
+        props.type === 'problem' ? '#ff6b6b' : 
+        props.type === 'solution' ? '#007bff' : '#4ade80'
+    };
+
+    background: ${props => 
+        props.type === 'problem' ? 'rgba(255, 107, 107, 0.15)' : 
+        props.type === 'solution' ? 'rgba(0, 123, 255, 0.15)' : 'rgba(74, 222, 128, 0.15)'
+    };
+`;
+
+export const FlowBody = styled.div`
+    ul { 
+        list-style: none; 
+        padding: 0; 
+
+        li { 
+            position: relative; 
+            padding-left: 15px; 
+            margin-bottom: 8px; 
+            color: #d1d5db; 
+            font-size: 15px; 
+
+            &::before { 
+                content: "•"; 
+                position: absolute; 
+                left: 0; 
+                color: #444; 
+            } 
+        } 
+    }
+`;
+
+export const AnalysisBox = styled.div`
+    margin-top: 20px;
+    padding: 18px;
+    background: rgba(255, 107, 107, 0.05);
+    border-radius: 12px;
+
+    strong { 
+        display: block; 
+        font-size: 11px; 
+        text-transform: uppercase; 
+        color: #ff6b6b; 
+        margin-bottom: 10px; 
+        letter-spacing: 1px; 
+    }
+
+    ul li { 
+        position: relative;
+        padding-left: 20px;
+        display: flex;
+        font-size: 14px; 
+        color: #d1d5db; 
+
+        &::before { 
+            content: "→"; 
+            color: #ff6b6b; 
+            position: absolute;
+            left: 0;
+            top: 0; 
+        } 
+    }
+`;
+
+export const DecisionBox = styled.div`
+    background: rgba(0, 123, 255, 0.08);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14.5px;
+    border-left: 3px solid #007bff;
+    color: #e2e8f0;
+`;
+
+export const ImplementationGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    span { 
+        font-family: 'JetBrains Mono', monospace; 
+        font-size: 13px; 
+        color: #94a3b8; 
+        background: #0f1115; 
+        padding: 10px 14px; 
+        border-radius: 8px; 
+        display: flex; 
+        align-items: center; 
+
+        &::before { 
+            content: "•"; 
+            color: #007bff; 
+            margin-right: 8px; 
+        } 
+    }
+
+    @media (max-width: 768px) { 
+        grid-template-columns: 1fr; 
+    }
+`;
+
+export const ResultList = styled.ul`
+    li { 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+        color: #f1f5f9; 
+        font-weight: 500; 
+
+        &::before { 
+            display: none; 
+        } 
+
+        svg { 
+            color: #4ade80; 
+        } 
+    }
+`;
+
+export const TradeOffBox = styled.div`
+    margin-top: 20px;
+    font-size: 13.5px;
+    color: #888;
+    font-style: italic;
+    padding-left: 5px;
 `;
 
 export const RetrospectCard = styled.div`

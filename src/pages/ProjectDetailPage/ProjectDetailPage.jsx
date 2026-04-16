@@ -176,47 +176,63 @@ function ProjectDetailPage() {
                 )}
 
                 <S.SectionTitle><FiCheckCircle /> 문제 해결</S.SectionTitle>
-                <S.TroubleShootingCard>
-                    <S.ProblemSection>
-                        <h4>[문제 정의 및 원인 분석]</h4>
-                        <p>{project?.troubleshooting?.problem}</p>
-                        <ul>
-                            {project?.troubleshooting?.causes?.map((c, i) => (
-                                <li key={i}>{c}</li>
-                            ))}
-                        </ul>
-                    </S.ProblemSection>
+                {project?.troubleshooting?.map((t, idx) => (
+                    <S.FlowContainer key={idx}>
+                        <S.FlowCard type="problem">
+                            <S.FlowHeader>
+                                <S.FlowBadge type="problem">PROBLEM & ANALYSIS</S.FlowBadge>
+                                <h4>{t.problem.summary}</h4>
+                            </S.FlowHeader>
+                            <S.FlowBody>
+                                <ul>
+                                    {t.problem.details.map((d, i) => <li key={i}>{d}</li>)}
+                                </ul>
+                                <S.AnalysisBox>
+                                    <strong>Root Cause</strong>
+                                    <ul>
+                                        {t.analysis.map((a, i) => <li key={i}>{a}</li>)}
+                                    </ul>
+                                </S.AnalysisBox>
+                            </S.FlowBody>
+                        </S.FlowCard>
 
-                    <S.Divider />
+                        <S.FlowCard type="solution">
+                            <S.FlowHeader>
+                                <S.FlowBadge type="solution">SOLUTION & IMPLEMENTATION</S.FlowBadge>
+                                <h4>{t.solution.summary}</h4>
+                            </S.FlowHeader>
+                            <S.FlowBody>
+                                <S.DecisionBox>
+                                    <strong>Decision:</strong> {t.solution.decision}
+                                </S.DecisionBox>
+                                <S.ImplementationGrid>
+                                    {t.implementation.map((item, i) => (
+                                        <span key={i}>{item}</span>
+                                    ))}
+                                </S.ImplementationGrid>
+                            </S.FlowBody>
+                        </S.FlowCard>
 
-                    <S.ImprovementSection>
-                        <h4>[해결 및 개선 성과]</h4>
-                        <S.ImprovementGrid>
-                            {project?.troubleshooting?.improvements?.map((item, i) => (
-                                <S.ImprovementItem key={i}>
-                                    <S.ItemHeader>
-                                        <S.Badge>Task {i + 1}</S.Badge>
-                                        <h5>{item?.title}</h5>
-                                    </S.ItemHeader>
-                                    <S.ActionDesc>{item?.action}</S.ActionDesc>
-
-                                    <S.ComparisonBox>
-                                        <S.AsisSide>
-                                            <label>AS-IS</label>
-                                            <p>{item?.asis}</p>
-                                        </S.AsisSide>
-
-                                        <FiArrowRight />
-                                        <S.TobeSide>
-                                            <label>TO-BE</label>
-                                            <p>{item?.tobe}</p>
-                                        </S.TobeSide>
-                                    </S.ComparisonBox>
-                                </S.ImprovementItem>
-                            ))}
-                        </S.ImprovementGrid>
-                    </S.ImprovementSection>
-                </S.TroubleShootingCard>
+                        <S.FlowCard type="result">
+                            <S.FlowHeader>
+                                <S.FlowBadge type="result">RESULT & TRADE-OFF</S.FlowBadge>
+                                <h4>Outcome</h4>
+                            </S.FlowHeader>
+                            <S.FlowBody>
+                                <S.ResultList>
+                                    {t.result.success.map((s, i) => (
+                                        <li key={i}><FiCheckCircle /> {s}</li>
+                                    ))}
+                                </S.ResultList>
+                                {t.result.tradeOff && (
+                                    <S.TradeOffBox>
+                                        <strong>Trade-off:</strong> {t.result.tradeOff}
+                                    </S.TradeOffBox>
+                                )}
+                            </S.FlowBody>
+                        </S.FlowCard>
+                    </S.FlowContainer>
+                ))}
 
                 <S.SectionTitle><FiSearch /> 회고</S.SectionTitle>
                 <S.RetrospectCard>
