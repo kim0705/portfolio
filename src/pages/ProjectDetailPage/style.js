@@ -594,10 +594,18 @@ export const LimitationCard = styled.div`
     margin-bottom: 40px;
     border: 1px solid #2d3139;
 
+    p {
+        color: #ffffff;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.5;
+        margin-top: 20px;
+    }
+
     ul {
         list-style: none;
         padding: 0;
-        margin-top: 24px;
+        padding-top: 24px;
     }
 
     li {
@@ -616,7 +624,8 @@ export const LimitationCard = styled.div`
             color: #a78bfa;
             font-weight: 700;
             font-size: 18px;
-            top: -2px;
+            top: 50%;
+            transform: translateY(-55%);
         }
 
         &:last-child {
