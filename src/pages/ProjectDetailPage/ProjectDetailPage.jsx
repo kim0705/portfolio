@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight, FiSettings } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight, FiSettings, FiAlertCircle } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -45,6 +45,7 @@ function ProjectDetailPage() {
                     <span>{project?.category}</span>
                     <h1>{project?.title}</h1>
 
+                    {/* 개요 Section */}
                     <S.ProjectOverview>
                         <span><FiCalendar />참여 기간: {project?.period}</span>
                         <span><FiUsers />개발 인원: {project?.team}</span>
@@ -92,6 +93,7 @@ function ProjectDetailPage() {
                     </S.ProjectImagesSection>
                 )}
 
+                {/* 기술 스택 Section */}
                 <S.TechStackSection>
                     {project?.techStack?.map((group, i) => (
                         <S.TechGroup key={i}>
@@ -105,6 +107,7 @@ function ProjectDetailPage() {
                     ))}
                 </S.TechStackSection>
 
+                {/* 프로젝트 핵심 과업 Section */}
                 <S.SectionTitle><FiZap /> 프로젝트 핵심 과업</S.SectionTitle>
                 <S.TaskGrid>
                     {project?.tasks?.map((task, i) => (
@@ -147,6 +150,7 @@ function ProjectDetailPage() {
                     </>
                 )}
 
+                {/* 담당 역할 및 수행 내역 Section */}
                 <S.SectionTitle><FiUsers /> 담당 역할 및 수행 내역</S.SectionTitle>
                 <S.RoleDetailSection>
                     {project?.roles?.map((role) => (
@@ -168,6 +172,7 @@ function ProjectDetailPage() {
                     </>
                 ) : <></>}
 
+                {/* 핵심 로직 Section */}
                 {flowData[project?.projectId] && (
                     <>
                         <S.SectionTitle><FiZap /> 핵심 로직</S.SectionTitle>
@@ -175,6 +180,7 @@ function ProjectDetailPage() {
                     </>
                 )}
 
+                {/* 문제 해결 Section */}
                 <S.SectionTitle><FiCheckCircle /> 문제 해결</S.SectionTitle>
                 {project?.troubleshooting?.map((t, idx) => (
                     <S.FlowContainer key={idx}>
@@ -234,6 +240,17 @@ function ProjectDetailPage() {
                     </S.FlowContainer>
                 ))}
 
+                {/* 한계 및 개선 방향 Section */}
+                {project?.limitations && (
+                    <>
+                        <S.SectionTitle><FiAlertCircle /> 한계 및 개선 방향</S.SectionTitle>
+                        <S.LimitationCard>
+                            <p>{project?.limitations}</p>
+                        </S.LimitationCard>
+                    </>
+                )}
+
+                {/* 회고 Section */}
                 <S.SectionTitle><FiSearch /> 회고</S.SectionTitle>
                 <S.RetrospectCard>
                     <p>{project?.retrospect}</p>

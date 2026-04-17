@@ -585,6 +585,23 @@ export const TradeOffBox = styled.div`
     padding-left: 5px;
 `;
 
+export const LimitationCard = styled.div`
+    background: #1a1d23;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 40px 30px;
+    border: 1px solid #2d3139;
+
+    p {
+        margin: 0;
+        color: #e2e8f0;
+        font-size: 15px;
+        line-height: 1.7;
+        font-weight: 500;
+        white-space: pre-wrap;
+    }
+`;
+
 export const RetrospectCard = styled.div`
     position: relative;
     padding: 40px 30px;
