@@ -459,12 +459,14 @@ export const FlowBadge = styled.span`
     letter-spacing: 1px;
     color: ${props => 
         props.type === 'problem' ? '#ff6b6b' : 
-        props.type === 'solution' ? '#007bff' : '#4ade80'
+        props.type === 'solution' ? '#007bff' :
+        props.type === 'limitation' ? '#a78bfa' : '#4ade80'
     };
 
     background: ${props => 
         props.type === 'problem' ? 'rgba(255, 107, 107, 0.15)' : 
-        props.type === 'solution' ? 'rgba(0, 123, 255, 0.15)' : 'rgba(74, 222, 128, 0.15)'
+        props.type === 'solution' ? 'rgba(0, 123, 255, 0.15)' : 
+        props.type === 'limitation' ? 'rgba(167, 139, 250, 0.15)' : 'rgba(74, 222, 128, 0.15)'
     };
 `;
 
@@ -588,17 +590,38 @@ export const TradeOffBox = styled.div`
 export const LimitationCard = styled.div`
     background: #1a1d23;
     border-radius: 24px;
-    padding: 30px;
-    margin-bottom: 40px 30px;
+    padding: 40px 30px;
+    margin-bottom: 40px;
     border: 1px solid #2d3139;
 
-    p {
-        margin: 0;
-        color: #e2e8f0;
-        font-size: 15px;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 24px;
+    }
+
+    li {
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 16px;
+        color: #d1d5db;
+        font-size: 15.5px;
         line-height: 1.7;
         font-weight: 500;
-        white-space: pre-wrap;
+
+        &::before {
+            content: "→"; 
+            position: absolute;
+            left: 0;
+            color: #a78bfa;
+            font-weight: 700;
+            font-size: 18px;
+            top: -2px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 `;
 

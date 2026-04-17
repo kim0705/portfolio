@@ -245,7 +245,12 @@ function ProjectDetailPage() {
                     <>
                         <S.SectionTitle><FiAlertCircle /> 한계 및 개선 방향</S.SectionTitle>
                         <S.LimitationCard>
-                            <p>{project?.limitations}</p>
+                            <S.FlowBadge type="limitation">Limitations & Improvements</S.FlowBadge>
+                            <ul>
+                                {project?.limitations?.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
                         </S.LimitationCard>
                     </>
                 )}
