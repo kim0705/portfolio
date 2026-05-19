@@ -148,5 +148,66 @@ export const flowData = {
             { id: 'e11-13', source: 'n11', target: 'n13' },
             { id: 'e12-13', source: 'n12', target: 'n13' },
         ]
+    },
+
+    /* 프로젝트 ID 3: 수강 신청 및 취소·환불 프로세스 */
+    3: {
+        title: "수강 신청 및 취소·환불 프로세스",
+        description: [
+            "정원 기반 PENDING / WAITLIST 자동 분기",
+            "동시 신청 경합 조건을 DB 레벨에서 처리",
+            "취소 시 확정 후 7일 이내 환불 정책 적용",
+            "수강 취소 시 대기열 자동 승격"
+        ],
+        nodes: [
+            /* --- 수강 신청 흐름 (좌측) --- */
+            { id: 's1', type: 'input', position: { x: 100, y: 0 }, data: { label: '수강 신청 요청' }, style: commonNodeStyle },
+            { id: 's2', position: { x: 100, y: 120 }, data: { label: '기존 신청 이력 확인' }, style: { ...commonNodeStyle, borderRadius: '20px', border: '2px solid #007bff' } },
+            { id: 's3', position: { x: 350, y: 120 }, data: { label: '중복 신청 → 400' }, style: { ...commonNodeStyle, background: '#44272b', border: '1px solid #f8d7da' } },
+            { id: 's4', position: { x: 100, y: 240 }, data: { label: '정원 확인' }, style: { ...commonNodeStyle, borderRadius: '20px', border: '2px solid #007bff' } },
+            { id: 's5', position: { x: 350, y: 340 }, data: { label: 'WAITLIST 등록\n(정원 초과)' }, style: { ...commonNodeStyle, background: '#3d3623', border: '1px solid #ffc107' } },
+
+            /* 동시성 처리 그룹 */
+            {
+                id: 'group_concurrent',
+                position: { x: -30, y: 320 },
+                data: { label: 'DB 레벨 동시성 처리' },
+                style: { width: 260, height: 220, backgroundColor: 'rgba(45, 49, 57, 0.4)', border: '2px dashed #3d4450', color: '#94a3b8' }
+            },
+            { id: 's6', extent: 'parent', parentId: 'group_concurrent', position: { x: 30, y: 50 }, data: { label: 'enrolled_count + 1\n(WHERE count < capacity)' }, style: { ...commonNodeStyle, border: '1px solid #007bff' } },
+            { id: 's7', extent: 'parent', parentId: 'group_concurrent', position: { x: 30, y: 150 }, data: { label: 'PENDING 등록' }, style: { ...commonNodeStyle, color: '#007bff', border: '2px solid #007bff' } },
+
+            { id: 's8', position: { x: 350, y: 480 }, data: { label: 'WAITLIST 등록\n(동시 경합 실패)' }, style: { ...commonNodeStyle, background: '#3d3623', border: '1px solid #ffc107' } },
+            { id: 's9', position: { x: 100, y: 600 }, data: { label: '결제 완료 → CONFIRMED' }, style: { ...commonNodeStyle, background: '#1e3a5f', border: '1px solid #007bff' } },
+
+            /* --- 취소·환불 흐름 (우측) --- */
+            { id: 'c1', type: 'input', position: { x: 680, y: 0 }, data: { label: '수강 취소 요청' }, style: commonNodeStyle },
+            { id: 'c2', position: { x: 680, y: 120 }, data: { label: '수강 신청 상태 확인' }, style: { ...commonNodeStyle, borderRadius: '20px', border: '2px solid #007bff' } },
+            { id: 'c3', position: { x: 680, y: 240 }, data: { label: 'CONFIRMED:\n확정 후 7일 이내?' }, style: { ...commonNodeStyle, borderRadius: '20px' } },
+            { id: 'c4', position: { x: 900, y: 340 }, data: { label: '취소 불가\n(7일 초과)' }, style: { ...commonNodeStyle, background: '#44272b', border: '1px solid #f8d7da' } },
+            { id: 'c5', position: { x: 680, y: 360 }, data: { label: 'Toss 환불 API 호출' }, style: commonNodeStyle },
+            { id: 'c6', position: { x: 680, y: 480 }, data: { label: 'CANCELLED 업데이트' }, style: commonNodeStyle },
+            { id: 'c7', position: { x: 680, y: 600 }, data: { label: 'WAITLIST → PENDING\n대기열 자동 승격' }, style: { ...commonNodeStyle, background: '#1e3a5f', border: '1px solid #007bff' } },
+        ],
+        edges: [
+            /* 수강 신청 엣지 */
+            { id: 'es1-2', source: 's1', target: 's2' },
+            { id: 'es2-3', source: 's2', target: 's3', label: '이미 신청' },
+            { id: 'es2-4', source: 's2', target: 's4', label: '신청 가능' },
+            { id: 'es4-5', source: 's4', target: 's5', label: '정원 초과' },
+            { id: 'es4-6', source: 's4', target: 's6', label: '정원 여유' },
+            { id: 'es6-7', source: 's6', target: 's7', label: '성공' },
+            { id: 'es6-8', source: 's6', target: 's8', label: '실패(경합)' },
+            { id: 'es7-9', source: 's7', target: 's9', animated: true },
+
+            /* 취소·환불 엣지 */
+            { id: 'ec1-2', source: 'c1', target: 'c2' },
+            { id: 'ec2-3', source: 'c2', target: 'c3', label: 'CONFIRMED' },
+            { id: 'ec2-6', source: 'c2', target: 'c6', label: 'PENDING/WAITLIST' },
+            { id: 'ec3-4', source: 'c3', target: 'c4', label: '7일 초과' },
+            { id: 'ec3-5', source: 'c3', target: 'c5', label: '7일 이내' },
+            { id: 'ec5-6', source: 'c5', target: 'c6', animated: true },
+            { id: 'ec6-7', source: 'c6', target: 'c7' },
+        ]
     }
 };

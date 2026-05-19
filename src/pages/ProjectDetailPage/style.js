@@ -194,17 +194,24 @@ export const ProjectImagesSection = styled.div`
 
 export const MediaContainer = styled.div`
     position: relative;
-    width: 100%;
-    min-height: 250px;
+    flex: 1 1 0;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
     border-radius: 12px;
     overflow: hidden;
     background: #1a1d23;
 
     img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
         display: block;
         transition: opacity 0.4s ease-in-out;
+    }
+
+    @media (max-width: 1024px) {
+        width: 100%;
+        flex: none;
     }
 `;
 
@@ -261,11 +268,12 @@ export const SectionTitle = styled.h2`
     color: #ffffff;
 
     svg {
-        color: #007bff; 
+        color: #007bff;
         font-size: 24px;
         flex-shrink: 0;
     }
 `;
+
 
 export const TaskGrid = styled.div`
     display: grid;
@@ -359,7 +367,7 @@ export const VideoNoteBox = styled.div`
     }
 
     span {
-        color: #94a3b8;
+        color: #b8c4d0;
         font-size: 14.5px;
         line-height: 1.6;
         word-break: keep-all;
@@ -422,9 +430,42 @@ export const RoleGroup = styled.div`
 export const FlowContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
     margin-bottom: 80px;
 `;
+
+export const FlowConnector = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+    color: #94a3b8;
+    font-size: 26px;
+`;
+
+export const FlowStepNumber = styled.span`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid ${props =>
+        props.$type === 'problem' ? '#f87171' :
+        props.$type === 'solution' ? '#60a5fa' :
+        props.$type === 'result' ? '#4ade80' : '#3d4451'
+    };
+    font-size: 11px;
+    font-weight: 700;
+    color: ${props =>
+        props.$type === 'problem' ? '#f87171' :
+        props.$type === 'solution' ? '#60a5fa' :
+        props.$type === 'result' ? '#4ade80' : '#94a3b8'
+    };
+    flex-shrink: 0;
+    margin-right: 10px;
+`;
+
 
 export const FlowCard = styled.div`
     background: #1a1d23;
@@ -432,43 +473,28 @@ export const FlowCard = styled.div`
     border-radius: 20px;
     padding: 30px;
     position: relative;
-    border-left: 4px solid ${props => 
-        props.type === 'problem' ? '#ff6b6b' : 
-        props.type === 'solution' ? '#007bff' : '#4ade80'
-    };
 `;
 
 export const FlowHeader = styled.div`
     margin-bottom: 20px;
 
-    h4 { 
-        font-size: 19px; 
-        color: #ffffff; 
-        margin-top: 10px; 
-        font-weight: 700; 
+    h4 {
+        font-size: 19px;
+        color: #ffffff;
+        margin-top: 10px;
+        font-weight: 700;
     }
 `;
 
 export const FlowBadge = styled.span`
-    font-size: 10px;
-    font-weight: 800;
-    color: ${props => props.color};
-    background: ${props => props.color}15;
-    padding: 4px 10px;
-    border-radius: 6px;
-    letter-spacing: 1px;
-    color: ${props => 
-        props.type === 'problem' ? '#ff6b6b' : 
-        props.type === 'solution' ? '#007bff' :
-        props.type === 'limitation' ? '#a78bfa' : '#4ade80'
-    };
-
-    background: ${props => 
-        props.type === 'problem' ? 'rgba(255, 107, 107, 0.15)' : 
-        props.type === 'solution' ? 'rgba(0, 123, 255, 0.15)' : 
-        props.type === 'limitation' ? 'rgba(167, 139, 250, 0.15)' : 'rgba(74, 222, 128, 0.15)'
-    };
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8896a8;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 `;
+
 
 export const FlowBody = styled.div`
     ul { 
@@ -495,32 +521,33 @@ export const FlowBody = styled.div`
 export const AnalysisBox = styled.div`
     margin-top: 20px;
     padding: 18px;
-    background: rgba(255, 107, 107, 0.05);
+    background: rgba(255, 255, 255, 0.02);
     border-radius: 12px;
+    border: 1px solid #2d3139;
 
-    strong { 
-        display: block; 
-        font-size: 11px; 
-        text-transform: uppercase; 
-        color: #ff6b6b; 
-        margin-bottom: 10px; 
-        letter-spacing: 1px; 
+    strong {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #8896a8;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
     }
 
-    ul li { 
+    ul li {
         position: relative;
         padding-left: 20px;
         display: flex;
-        font-size: 14px; 
-        color: #d1d5db; 
+        font-size: 14px;
+        color: #d1d5db;
 
-        &::before { 
-            content: "→"; 
-            color: #ff6b6b; 
+        &::before {
+            content: "→";
+            color: #64748b;
             position: absolute;
             left: 0;
-            top: 0; 
-        } 
+            top: 0;
+        }
     }
 `;
 
@@ -539,15 +566,15 @@ export const ImplementationGrid = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 
-    span { 
-        font-family: 'JetBrains Mono', monospace; 
-        font-size: 13px; 
-        color: #94a3b8; 
-        background: #0f1115; 
-        padding: 10px 14px; 
-        border-radius: 8px; 
-        display: flex; 
-        align-items: center; 
+    span {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        color: #b8c4d0;
+        background: #0f1115;
+        padding: 10px 14px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
 
         &::before { 
             content: "•"; 
@@ -573,18 +600,25 @@ export const ResultList = styled.ul`
             display: none; 
         } 
 
-        svg { 
-            color: #4ade80; 
-        } 
+        svg {
+            color: #94a3b8;
+        }
     }
 `;
 
 export const TradeOffBox = styled.div`
     margin-top: 20px;
-    font-size: 13.5px;
-    color: #888;
-    font-style: italic;
-    padding-left: 5px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    border: 1px solid #2d3139;
+    font-size: 14px;
+    color: #b8c4d0;
+
+    strong {
+        color: #c8d4e0;
+        margin-right: 4px;
+    }
 `;
 
 export const LimitationCard = styled.div`
@@ -618,19 +652,78 @@ export const LimitationCard = styled.div`
         font-weight: 500;
 
         &::before {
-            content: "→"; 
+            content: "•";
             position: absolute;
             left: 0;
-            color: #a78bfa;
-            font-weight: 700;
+            color: #444;
             font-size: 18px;
-            top: 50%;
-            transform: translateY(-55%);
+            top: -2px;
         }
 
         &:last-child {
             margin-bottom: 0;
         }
+    }
+`;
+
+export const CodeSnippetSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
+
+export const CodeSnippetCard = styled.div`
+    background: #1a1d23;
+    border: 1px solid #2d3139;
+    border-radius: 16px;
+    overflow: hidden;
+`;
+
+export const CodeSnippetHeader = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #2d3139;
+
+    span:last-of-type {
+        font-size: 14px;
+        font-weight: 600;
+        color: #e2e8f0;
+    }
+`;
+
+export const CodeSnippetLabel = styled.span`
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: ${props => props.$lang === 'Java' ? '#a78bfa' : '#38bdf8'};
+    background: ${props => props.$lang === 'Java' ? 'rgba(167, 139, 250, 0.1)' : 'rgba(56, 189, 248, 0.1)'};
+`;
+
+export const CodeSnippetDescription = styled.p`
+    padding: 14px 20px 0;
+    font-size: 13.5px;
+    color: #b8c4d0;
+    margin: 0;
+    line-height: 1.6;
+`;
+
+export const CodeBlock = styled.pre`
+    padding: 20px;
+    margin: 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #c8d4e0;
+    background: #0f1115;
+
+    code {
+        font-family: inherit;
     }
 `;
 

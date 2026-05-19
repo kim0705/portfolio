@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight, FiSettings, FiAlertCircle } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight, FiSettings, FiAlertCircle, FiCode } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -180,13 +180,37 @@ function ProjectDetailPage() {
                     </>
                 )}
 
+                {/* 핵심 코드 Section */}
+                {project?.codeSnippets?.length > 0 && (
+                    <>
+                        <S.SectionTitle><FiCode /> 핵심 코드</S.SectionTitle>
+                        <S.CodeSnippetSection>
+                            {project.codeSnippets.map(snippet => (
+                                <S.CodeSnippetCard key={snippet.id}>
+                                    <S.CodeSnippetHeader>
+                                        <S.CodeSnippetLabel $lang={snippet.label}>{snippet.label}</S.CodeSnippetLabel>
+                                        <span>{snippet.title}</span>
+                                    </S.CodeSnippetHeader>
+                                    {snippet.description && (
+                                        <S.CodeSnippetDescription>{snippet.description}</S.CodeSnippetDescription>
+                                    )}
+                                    <S.CodeBlock>
+                                        <code>{snippet.code}</code>
+                                    </S.CodeBlock>
+                                </S.CodeSnippetCard>
+                            ))}
+                        </S.CodeSnippetSection>
+                    </>
+                )}
+
                 {/* 문제 해결 Section */}
                 <S.SectionTitle><FiCheckCircle /> 문제 해결</S.SectionTitle>
                 {project?.troubleshooting?.map((t, idx) => (
                     <S.FlowContainer key={idx}>
                         <S.FlowCard type="problem">
                             <S.FlowHeader>
-                                <S.FlowBadge type="problem">PROBLEM & ANALYSIS</S.FlowBadge>
+                                <S.FlowStepNumber $type="problem">01</S.FlowStepNumber>
+                                <S.FlowBadge>PROBLEM & ANALYSIS</S.FlowBadge>
                                 <h4>{t.problem.summary}</h4>
                             </S.FlowHeader>
                             <S.FlowBody>
@@ -202,9 +226,11 @@ function ProjectDetailPage() {
                             </S.FlowBody>
                         </S.FlowCard>
 
+                        <S.FlowConnector>↓</S.FlowConnector>
                         <S.FlowCard type="solution">
                             <S.FlowHeader>
-                                <S.FlowBadge type="solution">SOLUTION & IMPLEMENTATION</S.FlowBadge>
+                                <S.FlowStepNumber $type="solution">02</S.FlowStepNumber>
+                                <S.FlowBadge>SOLUTION & IMPLEMENTATION</S.FlowBadge>
                                 <h4>{t.solution.summary}</h4>
                             </S.FlowHeader>
                             <S.FlowBody>
@@ -219,9 +245,11 @@ function ProjectDetailPage() {
                             </S.FlowBody>
                         </S.FlowCard>
 
+                        <S.FlowConnector>↓</S.FlowConnector>
                         <S.FlowCard type="result">
                             <S.FlowHeader>
-                                <S.FlowBadge type="result">RESULT & TRADE-OFF</S.FlowBadge>
+                                <S.FlowStepNumber $type="result">03</S.FlowStepNumber>
+                                <S.FlowBadge>RESULT & TRADE-OFF</S.FlowBadge>
                                 <h4>Outcome</h4>
                             </S.FlowHeader>
                             <S.FlowBody>

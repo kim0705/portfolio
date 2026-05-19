@@ -233,5 +233,154 @@
                 ]
             }
         ]
+    },
+    {
+        "projectId": 3,
+        "img": "",
+        "images": [
+            "images/projects/courseListImg.png",
+            "images/projects/adminDashboardImg.png"
+        ],
+        "videos": [
+            "images/projects/courseEnrollmentVideo.mp4"
+        ],
+        "videoNotes": [
+            {
+                "videoId": 0,
+                "title": "수강 신청 → 결제 흐름 및 대기열 검증",
+                "description": "창 두 개를 동시에 띄워 수강 신청부터 결제까지의 흐름과, 정원이 찬 이후 대기열 등록 및 취소 시 자동 승격되는 흐름을 시연한 영상입니다."
+            }
+        ],
+        "category": "Full-stack Web Development (Individual Project)",
+        "title": "강의 커머스 플랫폼",
+        "description": "과제 전형으로 진행했던 강의 플랫폼 프로젝트를 기반으로 이전 팀 프로젝트에서 부족했던 서버 검증과 동시성 처리를 직접 구현해보기 위해 결제, Spring Security, 관리자 기능 등을 추가로 확장한 개인 프로젝트입니다.",
+        "period": "2026.04 ~ 2026.05",
+        "team": "개인",
+        "github": "",
+        "codeSnippets": [
+            {
+                "id": 1,
+                "label": "SQL",
+                "title": "대기열 선점 잠금",
+                "description": "동시 취소 시 각 트랜잭션이 서로 다른 대기자를 선점하도록 FOR UPDATE SKIP LOCKED 적용",
+                "code": "SELECT id\n     , user_id\n     , course_id\n     , status\n  FROM enrollments\n WHERE course_id = #{courseId}\n   AND status = 'WAITLIST'\nORDER BY created_at ASC\nLIMIT 1\nFOR UPDATE SKIP LOCKED"
+            },
+            {
+                "id": 2,
+                "label": "SQL",
+                "title": "재신청 경합 방지",
+                "description": "재신청을 INSERT 대신 UPDATE로 처리하여 CANCELLED 상태일 때만 반영 - 동시 요청 중 한 건만 성공",
+                "code": "UPDATE enrollments\n   SET status = #{status}\n     , confirmed_at = #{confirmedAt}\n     , cancelled_at = #{cancelledAt}\n WHERE id = #{id}\n   AND status = 'CANCELLED'"
+            },
+            {
+                "id": 3,
+                "label": "Java",
+                "title": "중복 신청 예외 처리",
+                "description": "동시 신청 시 UNIQUE 제약 위반을 DuplicateKeyException으로 처리 - 한 건만 성공하도록 보장",
+                "code": "@ExceptionHandler(DuplicateKeyException.class)\npublic ResponseEntity<ApiResponse<?>> handleDuplicateKeyException(DuplicateKeyException e) {\n    log.warn(\"[GlobalExceptionHandler] DuplicateKeyException: {}\", e.getMessage());\n    return ResponseEntity.badRequest().body(ApiResponse.fail(400, \"이미 신청한 강의입니다.\"));\n}"
+            }
+        ],
+        "tasks": [
+            "수강 신청 / 취소 / 대기열 자동 승격 흐름 구현",
+            "동시 수강 신청 경합 조건 처리 (DB 레벨)",
+            "Toss Payments 결제 및 환불 연동"
+        ],
+        "roles": [
+            {
+                "roleId": 1,
+                "groupTitle": "Backend",
+                "details": [
+                    "Spring Security 기반 JWT 인증 필터 구현",
+                    "수강 신청 / 취소 / 대기열 승격 로직 구현",
+                    "Toss Payments API 연동 및 환불 처리 구현",
+                    "강제 폐강 시 전체 수강 신청 취소 및 환불 트랜잭션 설계",
+                    "동시 수강 신청 경합 조건 처리 (FOR UPDATE SKIP LOCKED, DuplicateKeyException 활용)",
+                    "Testcontainers 기반 MySQL 환경에서 동시성 통합 테스트 작성"
+                ]
+            },
+            {
+                "roleId": 2,
+                "groupTitle": "Frontend",
+                "details": [
+                    "React 기반 수강 신청 / 마이페이지 / 관리자 페이지 구현",
+                    "JWT 쿠키 기반 인증 흐름 처리",
+                    "관리자 대시보드 통계 차트 구현 (Recharts)"
+                ]
+            }
+        ],
+        "troubleshooting": [
+            {
+                "problem": {
+                    "summary": "동시 수강 신청 시 중복 처리 및 대기열 승격 경합 조건 발생",
+                    "details": [
+                        "여러 사용자가 동시에 같은 강의에 신청할 때 정원 초과 또는 중복 신청 발생",
+                        "취소와 재신청이 동시에 발생하면 두 건 모두 성공하는 경합 조건 존재",
+                        "수강 취소 직후 대기열 승격 시점에서 동시 취소로 인한 중복 승격 가능성"
+                    ]
+                },
+                "analysis": [
+                    "애플리케이션 레벨에서 중복을 제어하려 했으나 동시 요청 간 타이밍 문제로 한계 존재",
+                    "재신청 처리를 INSERT로 하면 동시 요청 시 두 건 모두 성공할 수 있는 구조"
+                ],
+                "solution": {
+                    "summary": "DB 레벨에서 경합 조건을 처리하는 방식으로 전환",
+                    "decision": "애플리케이션보다 DB 제약 조건과 잠금을 활용하는 것이 동시성 문제에 더 적합하다고 판단"
+                },
+                "implementation": [
+                    "중복 신청은 DB 충돌 시 DuplicateKeyException을 발생시켜 하나의 요청만 성공하도록 처리",
+                    "재신청은 INSERT 대신 AND status = 'CANCELLED' 조건을 건 UPDATE로 변경해 동시 요청 중 한 건만 반영",
+                    "대기열 승격에 FOR UPDATE SKIP LOCKED 적용으로 각 트랜잭션이 서로 다른 대기자를 선점하도록 처리",
+                    "Testcontainers로 실제 MySQL 환경에서 동시 요청 시나리오 통합 테스트 작성 및 검증"
+                ],
+                "result": {
+                    "success": [
+                        "동시 요청 중 1건만 성공하는 정상 동작 확인",
+                        "대기열 승격 중복 방지 및 안정적인 처리 확인"
+                    ],
+                    "tradeOff": "낙관적 락(충돌 시 재시도)이나 Redis 분산 락(애플리케이션 레벨 제어) 같은 대안도 있었지만 추가 의존성 없이 DB 수준에서 처리할 수 있다는 점에서 비관적 락 방식을 선택했습니다. 다만 경합이 높아질수록 잠금 대기가 늘어날 수 있고 트랜잭션 범위와 잠금 범위를 함께 고려해야 하는 복잡도가 생기는 단점이 있습니다."
+                }
+            }
+        ],
+        "limitations": {
+            "summary": "외부 API 의존 구조와 사용자 경험 측면에서 보완이 필요한 부분이 남아 있음",
+            "details": [
+                "강제 폐강 시 Toss Payments 환불 API 호출이 실패하면 해당 건은 수동으로 처리해야 하며 자동 재시도 메커니즘이 없어 누락 가능성 존재",
+                "대기열 승격 시 해당 사용자에게 별도 알림이 전달되지 않아, 승격 사실을 인지하지 못한 채 결제 기한을 넘길 수 있는 구조"
+            ]
+        },
+        "retrospect": "이전 팀 프로젝트를 진행하면서 \"동시에 여러 요청이 들어오면 어떻게 처리해야 할까?\"라는 고민이 남아 있었고 이번 프로젝트에서는 그 부분을 처음부터 고려하며 구현해볼 수 있었습니다. 단순히 코드 레벨에서 처리하는 것이 아니라 DB 제약 조건과 잠금 전략을 함께 고려해야 한다는 점을 알게 되었고 Testcontainers 기반 실제 MySQL 환경에서 직접 검증하면서 테스트 목적에 따라 환경과 방식도 달라져야 한다는 점을 경험했습니다.\n\n또한 이전 프로젝트에서는 서버 검증이 부족했다는 아쉬움이 있었기 때문에 이번에는 입력 검증과 인증 흐름을 서버 측에서도 보다 꼼꼼하게 처리하려고 했습니다. 구현 과정에서 클라이언트 검증만으로는 한계가 있다는 점을 체감했고 refresh token을 Redis로 관리하면서 만료 및 로그아웃 처리를 개선했습니다. 다만 access token 강제 무효화 방식은 아직 더 고민이 필요한 부분으로 남아 있습니다.",
+        "techStack": [
+            {
+                "category": "Backend",
+                "skills": [
+                    "Spring Boot",
+                    "Java",
+                    "MyBatis",
+                    "Spring Security",
+                    "JWT"
+                ]
+            },
+            {
+                "category": "Frontend",
+                "skills": [
+                    "React",
+                    "JavaScript"
+                ]
+            },
+            {
+                "category": "DB",
+                "skills": [
+                    "MySQL"
+                ]
+            },
+            {
+                "category": "Tools",
+                "skills": [
+                    "Git / GitHub",
+                    "Toss Payments API",
+                    "Testcontainers"
+                ]
+            }
+        ]
     }
 ]
