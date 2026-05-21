@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiArrowRight, FiSettings, FiAlertCircle, FiCode } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiSettings, FiAlertCircle, FiCode } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -14,24 +14,14 @@ function ProjectDetailPage() {
     const { projectId } = useParams();
     const navigate = useNavigate();
 
-    const [loadedCount, setLoadedCount] = useState(0);
-    const [isAllReady, setIsAllReady] = useState(false);
+    const [loadedItems, setLoadedItems] = useState(new Set());
 
     /* 최신순 정렬 (ID 기반 내림차순) */
     const sortedProjects = [...projectsData].sort((a, b) => b.projectId - a.projectId);
     const project = projectId ? projectsData.find(p => p.projectId === parseInt(projectId)) : sortedProjects[0];
 
-    const totalMediaCount = (project?.images?.length || 0) + (project?.videos?.length || 0);
-
-    /* 미디어 로드 완료 시 호출될 함수 */
-    const handleMediaLoadComplete = () => {
-        setLoadedCount(prev => {
-            const newCount = prev + 1;
-            if (newCount >= totalMediaCount) {
-                setIsAllReady(true);
-            }
-            return newCount;
-        });
+    const handleItemLoad = (key) => {
+        setLoadedItems(prev => new Set([...prev, key]));
     };
 
     return (
@@ -66,30 +56,24 @@ function ProjectDetailPage() {
                     <p>{project?.description}</p>
                 </S.HeaderSection>
 
-                {totalMediaCount > 0 && !isAllReady && (
-                    <S.FullPageLoader>
-                        <C.LoadingSpinner />
-                        <span>데이터 로딩 중... ({loadedCount}/{totalMediaCount})</span>
-                    </S.FullPageLoader>
-                )}
-
                 {project?.images?.length > 0 && (
                     <S.ProjectImagesSection>
-                        {project.images.map((src, idx) => (
-                            <S.MediaContainer key={`img-${idx}`}>
-                                {/* 전체 로딩 전까지 스켈레톤 표시 */}
-                                {!isAllReady && <C.Skeleton />}
-                                <img
-                                    src={`${BASE_URL}${src}`}
-                                    alt={project?.title}
-                                    onLoad={handleMediaLoadComplete}
-                                    style={{
-                                        opacity: isAllReady ? 1 : 0,
-                                        visibility: isAllReady ? 'visible' : 'hidden'
-                                    }}
-                                />
-                            </S.MediaContainer>
-                        ))}
+                        {project.images.map((src, idx) => {
+                            const key = `img-${idx}`;
+                            const loaded = loadedItems.has(key);
+                            return (
+                                <S.MediaContainer key={key}>
+                                    {!loaded && <C.Skeleton />}
+                                    <img
+                                        src={`${BASE_URL}${src}`}
+                                        alt={project?.title}
+                                        onLoad={() => handleItemLoad(key)}
+                                        onError={() => handleItemLoad(key)}
+                                        style={{ opacity: loaded ? 1 : 0, visibility: loaded ? 'visible' : 'hidden' }}
+                                    />
+                                </S.MediaContainer>
+                            );
+                        })}
                     </S.ProjectImagesSection>
                 )}
 
@@ -120,24 +104,26 @@ function ProjectDetailPage() {
                         <S.SectionTitle><FiVideo /> 기능 시연 데모</S.SectionTitle>
                         <S.VideoSection>
                             {project.videos.map((video, idx) => {
+                                const key = `vid-${idx}`;
+                                const loaded = loadedItems.has(key);
                                 const videoNote = project?.videoNotes?.find(note => note.videoId === idx);
                                 return (
-                                    <S.VideoItem key={`vid-${idx}`}>
+                                    <S.VideoItem key={key}>
                                         <S.VideoContainer>
-                                            {/* 비디오 로딩 중일 때 스켈레톤 표시 */}
-                                            {!isAllReady && <C.Skeleton />}
+                                            {!loaded && <C.Skeleton />}
                                             <video
                                                 src={`${BASE_URL}${video}`}
                                                 controls
                                                 autoPlay
                                                 muted
                                                 playsInline
-                                                onCanPlayThrough={handleMediaLoadComplete}
-                                                style={{ opacity: isAllReady ? 1 : 0 }}
+                                                onLoadedMetadata={() => handleItemLoad(key)}
+                                                onError={() => handleItemLoad(key)}
+                                                style={{ opacity: loaded ? 1 : 0 }}
                                             />
                                         </S.VideoContainer>
 
-                                        {isAllReady && videoNote?.description && (
+                                        {loaded && videoNote?.description && (
                                             <S.VideoNoteBox>
                                                 <FiInfo />
                                                 <span><strong>Technical Note:</strong> {videoNote.description}</span>
