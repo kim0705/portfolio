@@ -253,10 +253,11 @@
         ],
         "category": "Full-stack Web Development (Individual Project)",
         "title": "강의 커머스 플랫폼",
-        "description": "과제 전형으로 진행했던 강의 플랫폼 프로젝트를 기반으로 이전 팀 프로젝트에서 부족했던 서버 검증과 동시성 처리를 직접 구현해보기 위해 결제, Spring Security, 관리자 기능 등을 추가로 확장한 개인 프로젝트입니다.",
+        "description": "수강 신청 시스템을 기반으로 이전 팀 프로젝트에서 부족했던 서버 검증과 동시성 처리를 직접 구현해보기 위해 결제, Spring Security, 관리자 기능 등을 추가로 확장한 개인 프로젝트입니다.",
         "period": "2026.04 ~ 2026.05",
         "team": "개인",
         "github": "https://github.com/kim0705/course-enrollment",
+        "url": "https://d3vgazv4kqn9do.cloudfront.net",
         "codeSnippets": [
             {
                 "id": 1,

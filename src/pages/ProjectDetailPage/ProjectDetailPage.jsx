@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as S from './style';
 import * as C from '../../styles/common'
 import projectsData from '../../data/projects.json';
-import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiSettings, FiAlertCircle, FiCode } from "react-icons/fi";
+import { FiArrowLeft, FiCalendar, FiUsers, FiGithub, FiShare, FiExternalLink, FiCheckCircle, FiSearch, FiZap, FiVideo, FiInfo, FiSettings, FiAlertCircle, FiCode } from "react-icons/fi";
 import ProjectFlow from '../../components/common/ProjectFlow/ProjectFlow';
 import { flowData } from '../../utils/flowData';
 import { BASE_URL } from '../../utils/asset';
@@ -49,6 +49,12 @@ function ProjectDetailPage() {
                         {project?.notion && (
                             <a href={project?.notion} target="_blank" rel="noreferrer">
                                 <FiShare /> Notion
+                            </a>
+                        )}
+
+                        {project?.url && (
+                            <a href={project?.url} target="_blank" rel="noreferrer">
+                                <FiExternalLink /> Live Demo
                             </a>
                         )}
                     </S.ProjectOverview>
