@@ -262,29 +262,29 @@
             {
                 "id": 1,
                 "label": "SQL",
-                "title": "대기열 선점 잠금",
-                "description": "동시 취소 시 각 트랜잭션이 서로 다른 대기자를 선점하도록 FOR UPDATE SKIP LOCKED 적용",
+                "title": "대기열 승격 시 중복 처리 방지",
+                "description": "동시 취소가 발생하더라도 동일한 대기자가 중복 승격되지 않도록 FOR UPDATE SKIP LOCKED 적용",
                 "code": "SELECT id\n     , user_id\n     , course_id\n     , status\n  FROM enrollments\n WHERE course_id = #{courseId}\n   AND status = 'WAITLIST'\nORDER BY created_at ASC\nLIMIT 1\nFOR UPDATE SKIP LOCKED"
             },
             {
                 "id": 2,
                 "label": "SQL",
-                "title": "재신청 경합 방지",
-                "description": "재신청을 INSERT 대신 UPDATE로 처리하여 CANCELLED 상태일 때만 반영 - 동시 요청 중 한 건만 성공",
+                "title": "동시 재신청 요청의 동시성 제어",
+                "description": "재신청을 INSERT 대신 조건부 UPDATE로 처리하여 CANCELLED 상태에서만 변경되도록 구현",
                 "code": "UPDATE enrollments\n   SET status = #{status}\n     , confirmed_at = #{confirmedAt}\n     , cancelled_at = #{cancelledAt}\n WHERE id = #{id}\n   AND status = 'CANCELLED'"
             },
             {
                 "id": 3,
                 "label": "Java",
-                "title": "중복 신청 예외 처리",
-                "description": "동시 신청 시 UNIQUE 제약 위반을 DuplicateKeyException으로 처리 - 한 건만 성공하도록 보장",
+                "title": "중복 수강 신청 방지",
+                "description": "UNIQUE 제약 조건 위반 시 DuplicateKeyException을 처리하여 중복 신청을 방지",
                 "code": "@ExceptionHandler(DuplicateKeyException.class)\npublic ResponseEntity<ApiResponse<?>> handleDuplicateKeyException(DuplicateKeyException e) {\n    log.warn(\"[GlobalExceptionHandler] DuplicateKeyException: {}\", e.getMessage());\n    return ResponseEntity.badRequest().body(ApiResponse.fail(400, \"이미 신청한 강의입니다.\"));\n}"
             }
         ],
         "tasks": [
-            "수강 신청 / 취소 / 대기열 자동 승격 흐름 구현",
-            "동시 수강 신청 경합 조건 처리",
-            "Toss Payments 결제 및 환불 연동"
+            "수강 신청·취소·대기열 승격을 포함한 수강 관리 기능 구현",
+            "조건부 UPDATE 기반 동시성 제어 및 정원 초과 방지",
+            "Toss Payments 결제·환불 및 강제 폐강 처리 구현"
         ],
         "roles": [
             {
@@ -295,9 +295,9 @@
                     "수강 신청 / 취소 / 대기열 승격 로직 구현",
                     "Toss Payments API 연동 및 환불 처리 구현",
                     "강제 폐강 시 전체 수강 신청 취소 및 환불 트랜잭션 설계",
-                    "동시 수강 신청 경합 조건 처리 (FOR UPDATE SKIP LOCKED, DuplicateKeyException 활용)",
+                    "DB 제약 조건과 잠금을 활용한 동시성 제어 구현 (조건부 UPDATE, FOR UPDATE SKIP LOCKED, DuplicateKeyException)",
                     "Testcontainers 기반 MySQL 환경에서 동시성 통합 테스트 작성",
-                    "로그아웃 시 Access Token Redis 블랙리스트 등록으로 즉시 무효화"
+                    "Redis 기반 Refresh Token 관리 및 Access Token 블랙리스트 처리 구현"
                 ]
             },
             {
@@ -326,7 +326,7 @@
                 ],
                 "solution": {
                     "summary": "DB 레벨에서 경합 조건을 처리하는 방식으로 전환",
-                    "decision": "애플리케이션보다 DB 제약 조건과 잠금을 활용하는 것이 동시성 문제에 더 적합하다고 판단"
+                    "decision": "애플리케이션 레벨 검증만으로는 동시 요청 간 경합 조건을 완전히 방지하기 어렵다고 판단하여 DB 레벨 제약 조건과 잠금을 활용하는 방식으로 변경"
                 },
                 "implementation": [
                     "중복 신청은 DB 충돌 시 DuplicateKeyException을 발생시켜 하나의 요청만 성공하도록 처리",
@@ -339,14 +339,14 @@
                         "동시 요청 중 1건만 성공하는 정상 동작 확인",
                         "대기열 승격 중복 방지 및 안정적인 처리 확인"
                     ],
-                    "tradeOff": "별도의 외부 시스템 없이 DB에서 정합성을 보장할 수 있는 방식으로 비관적 락을 선택했습니다. 다만 동시에 요청이 몰리는 경우에는 락으로 인해 처리 지연이 발생할 수 있습니다."
+                    "tradeOff": "비관적 락 대신 조건부 UPDATE를 사용해 락 대기를 줄였습니다. 정원 초과 방지가 핵심이었기 때문에 보다 단순한 구조를 선택했습니다."
                 }
             }
         ],
         "limitations": {
             "summary": "외부 API 의존 구조와 사용자 경험 측면에서 보완이 필요한 부분이 남아 있음",
             "details": [
-                "강제 폐강 시 Toss Payments 환불 API 호출이 실패하면 해당 건은 수동으로 처리해야 하며 자동 재시도 메커니즘이 없음. Toss 웹훅(PAYMENT_STATUS_CHANGED)으로 결제 상태 동기화를 보완했으나 환불 자체가 누락된 경우는 처리하지 못하는 한계가 있음",
+                "강제 폐강 시 Toss Payments 환불 API 호출이 실패하면 해당 건은 운영자가 별도 확인 후 재처리해야 하며 자동 재시도 메커니즘이 없음. Toss 웹훅(PAYMENT_STATUS_CHANGED)으로 결제 상태 동기화를 보완했으나 환불 자체가 누락된 경우는 처리하지 못하는 한계가 있음",
                 "대기열 승격 시 해당 사용자에게 별도 알림이 전달되지 않아, 승격 사실을 인지하지 못한 채 결제 기한을 넘길 수 있는 구조"
             ]
         },
